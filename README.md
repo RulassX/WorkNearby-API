@@ -40,16 +40,16 @@ Control de versiones: Git / GitHub.
 
 [Aun en proceso]
 
-WorkNearby-API/
-├─ src/
-│  ├─ main/
-│  │  ├─ kotlin/com/raul_fernandez_garcia/Worknearby_API
-│  │  │  ├─ WorkNearbyApiApplication.kt
-│  │  │  ├─ ...
-│  │  │
-│  │  └─resources/...
-│  └─ test/...
-└─ README.md
+    WorkNearby-API/
+    ├─ src/
+    │  ├─ main/
+    │  │  ├─ kotlin/com/raul_fernandez_garcia/Worknearby_API
+    │  │  │  ├─ WorkNearbyApiApplication.kt
+    │  │  │  ├─ ...
+    │  │  │
+    │  │  └─resources/...
+    │  └─ test/...
+    └─ README.md
 
 📊 Base de datos
 
