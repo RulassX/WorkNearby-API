@@ -8,4 +8,12 @@ class WorkNearbyApiApplication
 
 fun main(args: Array<String>) {
 	runApplication<WorkNearbyApiApplication>(*args)
+    patata()
+}
+
+fun patata(){
+    val texto = "patata con mas patata"
+
+    println(texto)
+
 }
