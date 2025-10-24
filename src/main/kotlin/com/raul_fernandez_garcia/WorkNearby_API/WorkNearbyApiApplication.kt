@@ -1,5 +1,6 @@
 package com.raul_fernandez_garcia.WorkNearby_API
 
+import com.raul_fernandez_garcia.WorkNearby_API.modelo.Cliente
 import com.raul_fernandez_garcia.WorkNearby_API.modelo.Usuario
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
@@ -34,6 +35,14 @@ fun gang() {
         rol = "cliente",
         fecha_reg = LocalDate.now()
     )
+    val cliente = Cliente(
+        id_cli = 1,
+        id_usr = 1,
+        direc = "direccion",
+        ciudad = "A Courña"
+    )
+
+    insertarCliente(cliente)
     insertarUsuario(usuario)
 }
 
@@ -42,7 +51,8 @@ fun insertarUsuario(usuario: Usuario) {
     val user = "root"
     val password = "root"
 
-    val insertQuery = "INSERT INTO usuarios (id_usuario, nombre, apellidos, email, password, telefono, rol, fecha_registro) VALUES (?, ?, ?, ?, ?, ?, ?, ?)"
+    val insertQuery =
+        "INSERT INTO usuario (id_usuario, nombre, apellidos, email, password, telefono, rol, fecha_registro) VALUES (?, ?, ?, ?, ?, ?, ?, ?)"
 
     try {
         val connection = DriverManager.getConnection(url, user, password)
@@ -68,5 +78,30 @@ fun insertarUsuario(usuario: Usuario) {
     }
 }
 
+fun insertarCliente(cliente: Cliente) {
+    val url = "jdbc:mysql://localhost:3306/worknearbydb?useSSL=false&serverTimezone=UTC"
+    val user = "root"
+    val password = "root"
 
+    val insertQuery = "INSERT INTO cliente (id_cliente, id_usuario, direccion, ciudad) VALUES (?, ?, ?, ?)"
+
+    try {
+        val connection = DriverManager.getConnection(url, user, password)
+        val preparedStatement = connection.prepareStatement(insertQuery)
+
+        preparedStatement.setInt(1, cliente.id_usr)
+        preparedStatement.setInt(2, cliente.id_cli)
+        preparedStatement.setString(3, cliente.direc)
+        preparedStatement.setString(4, cliente.ciudad)
+
+        val filasInsertadas = preparedStatement.executeUpdate()
+        println("Filas insertadas: $filasInsertadas")
+
+        preparedStatement.close()
+        connection.close()
+
+    } catch (e: Exception) {
+        e.printStackTrace()
+    }
+}
 
