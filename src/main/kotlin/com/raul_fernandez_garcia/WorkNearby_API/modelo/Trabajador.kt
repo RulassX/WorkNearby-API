@@ -1,6 +1,6 @@
 package com.raul_fernandez_garcia.WorkNearby_API.modelo
 
-class Trabajador(
+data class Trabajador(
     val id_trab: Int,
     val id_usr: Int,
     var descr: String,
