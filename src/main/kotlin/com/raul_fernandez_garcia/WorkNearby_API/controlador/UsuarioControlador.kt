@@ -20,9 +20,9 @@ class UsuarioController(private val usuarioRepository: UsuarioRepository) {
     @GetMapping
     fun listarUsuarios(): List<Usuario> = usuarioRepository.findAll()
 
-    // Obtener usuario por ID
+    // Buscar usuario por ID
     @GetMapping("/{id}")
-    fun obtenerUsuario(@PathVariable id: Int): ResponseEntity<Usuario> {
+    fun buscarUsuario(@PathVariable id: Int): ResponseEntity<Usuario> {
         val usuario = usuarioRepository.findById(id)
         return if (usuario.isPresent) {
             ResponseEntity.ok(usuario.get())
@@ -36,9 +36,9 @@ class UsuarioController(private val usuarioRepository: UsuarioRepository) {
     fun crearUsuario(@RequestBody usuario: Usuario): Usuario =
         usuarioRepository.save(usuario)
 
-    // Actualizar un usuario existente
+    // Modificar usuario existente
     @PutMapping("/{id}")
-    fun actualizarUsuario(
+    fun modificarUsuario(
         @PathVariable id: Int,
         @RequestBody datos: Usuario
     ): ResponseEntity<Usuario> {
