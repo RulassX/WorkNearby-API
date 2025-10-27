@@ -6,6 +6,13 @@ import org.springframework.stereotype.Repository
 
 @Repository
 
+//save(entity)
+//findAll()
+//findById(id)
+//delete(entity)
+//ejemplo personalizado: findByEmail(email: String)
+
+
 interface UsuarioRepository : JpaRepository<Usuario, Int> {
     fun findByEmail(email: String): Usuario?
 }
