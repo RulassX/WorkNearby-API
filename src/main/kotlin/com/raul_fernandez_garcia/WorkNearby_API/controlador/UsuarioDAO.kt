@@ -20,7 +20,7 @@ class UsuarioController(private val usuarioRepository: UsuarioRepository) {
     @GetMapping
     fun listarUsuarios(): List<Usuario> = usuarioRepository.findAll()
 
-    // Buscar usuario por ID
+    //Buscar usuario por ID
     @GetMapping("/{id}")
     fun buscarUsuario(@PathVariable id: Int): ResponseEntity<Usuario> {
         val usuario = usuarioRepository.findById(id)
@@ -31,26 +31,26 @@ class UsuarioController(private val usuarioRepository: UsuarioRepository) {
         }
     }
 
-    // Crear un nuevo usuario
+    //Añadir usuario
     @PostMapping
     fun crearUsuario(@RequestBody usuario: Usuario): Usuario =
         usuarioRepository.save(usuario)
 
-    // Modificar usuario existente
+    //Modificar usuario
     @PutMapping("/{id}")
     fun modificarUsuario(
         @PathVariable id: Int,
-        @RequestBody datos: Usuario
+        @RequestBody user: Usuario
     ): ResponseEntity<Usuario> {
         val usuarioExistente = usuarioRepository.findById(id)
         return if (usuarioExistente.isPresent) {
             val actualizado = usuarioExistente.get().copy(
-                nombre = datos.nombre,
-                apellidos = datos.apellidos,
-                email = datos.email,
-                password = datos.password,
-                telefono = datos.telefono,
-                rol = datos.rol
+                nombre = user.nombre,
+                apellidos = user.apellidos,
+                email = user.email,
+                password = user.password,
+                telefono = user.telefono,
+                rol = user.rol
             )
             ResponseEntity.ok(usuarioRepository.save(actualizado))
         } else {
@@ -58,7 +58,7 @@ class UsuarioController(private val usuarioRepository: UsuarioRepository) {
         }
     }
 
-    // Eliminar un usuario
+    //Eliminar usuario
     @DeleteMapping("/{id}")
     fun eliminarUsuario(@PathVariable id: Int): ResponseEntity<Void> {
         return if (usuarioRepository.existsById(id)) {
