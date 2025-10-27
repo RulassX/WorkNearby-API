@@ -1,14 +1,21 @@
 package com.raul_fernandez_garcia.WorkNearby_API.modelo
 
-data class Cliente(val id_cli: Int, val id_usr: Int, var direc: String, var ciudad: String) {
+import jakarta.persistence.*
 
-    fun createCliente(
-        newDirec: String, city: String
-    ) {
-        direc = newDirec
-        ciudad = city
-    }
-}
+@Entity
+@Table(name = "cliente")
+data class Cliente(
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    val idCli: Int = 0,
+
+    @OneToOne
+    @JoinColumn(name = "id_usuario")
+    val idUsr: Usuario,
+
+    val direccion: String,
+    val ciudad: String
+)
 
 
 

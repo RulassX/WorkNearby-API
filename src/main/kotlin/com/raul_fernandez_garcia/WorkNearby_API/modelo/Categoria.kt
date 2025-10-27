@@ -1,6 +1,13 @@
 package com.raul_fernandez_garcia.WorkNearby_API.modelo
 
-data class Categoria(val id_cate: Int, val nombre: String){
+import jakarta.persistence.*
 
+@Entity
+@Table(name = "categoria")
+data class Categoria(
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    val idCatg: Int = 0,
 
-}
+    val nombre: String
+)

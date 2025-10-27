@@ -1,32 +1,26 @@
 package com.raul_fernandez_garcia.WorkNearby_API.modelo
 
-import java.sql.Date
-import java.time.LocalDate
+import jakarta.persistence.*
+import java.time.LocalDateTime
 
+@Entity
+@Table(name = "usuario")
 data class Usuario(
-    val id_usr: Int,
-    var nombre: String,
-    var apellidos: String,
-    var email: String,
-    var password: String,
-    var telefono: Int,
-    var rol: String,
-    var fecha_reg: LocalDate
-) {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    val idUsr: Int = 0,
 
-    fun createUsuario(
-        name: String, lastName: String, newEmail: String,
-        newPassword: String, telf: Int, newRol: String, Date: LocalDate
-    ) {
-        nombre = name
-        apellidos = lastName
-        email = newEmail
-        password = newPassword
-        telefono = telf
-        rol = newRol
-        fecha_reg = Date
-    }
-}
+    val nombre: String,
+    val apellidos: String,
+    @Column(unique = true)
+    val email: String,
+    val password: String,
+    val telefono: String,
+    val rol: String,
+    val fechaReg: LocalDateTime = LocalDateTime.now()
+)
+
+
 
 
 
