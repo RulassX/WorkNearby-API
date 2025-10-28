@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController
 
 @RestController
 @RequestMapping("/usuarios")
-class UsuarioController(private val usuarioRepository: UsuarioRepository) {
+class UsuarioDAO(private val usuarioRepository: UsuarioRepository) {
 
     // Listar todos los usuarios
     @GetMapping
