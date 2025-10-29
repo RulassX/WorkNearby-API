@@ -33,8 +33,8 @@ class ResenaDAO(private val resenaRepository: ResenaRepository) {
 
     //Añadir reseña
     @PostMapping
-    fun crearResena(@RequestBody trabajador: Resena): Resena =
-        resenaRepository.save(trabajador)
+    fun crearResena(@RequestBody resena: Resena): Resena =
+        resenaRepository.save(resena)
 
     //Modificar reseña
     @PutMapping("/{id}")
@@ -42,9 +42,9 @@ class ResenaDAO(private val resenaRepository: ResenaRepository) {
         @PathVariable id: Int,
         @RequestBody res: Resena
     ): ResponseEntity<Resena> {
-        val trabajadorExistente = resenaRepository.findById(id)
-        return if (trabajadorExistente.isPresent) {
-            val actualizado = trabajadorExistente.get().copy(
+        val resenaExistente = resenaRepository.findById(id)
+        return if (resenaExistente.isPresent) {
+            val actualizado = resenaExistente.get().copy(
                 idRes = res.idRes,
                 idCli = res.idCli,
                 idTrab = res.idTrab,
