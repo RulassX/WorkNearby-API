@@ -17,5 +17,13 @@ data class Trabajador(
     val precioHora: Double,
     val radioKm: Double,
     val latitud: Double,
-    val longitud: Double
+    val longitud: Double,
+
+    @ManyToMany
+    @JoinTable(
+        name = "trabajador_categoria",
+        joinColumns = [JoinColumn(name = "id_trabajador")],
+        inverseJoinColumns = [JoinColumn(name = "id_categoria")]
+    )
+    val categorias: List<Categoria> = listOf()
 )
