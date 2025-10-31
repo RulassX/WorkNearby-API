@@ -7,7 +7,7 @@ import jakarta.persistence.*
 data class Categoria(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val idCatg: Int = 0,
+    val id: Int = 0,
 
     val nombre: String
 )

@@ -46,7 +46,7 @@ class CategoriaDAO(private val categoriaRepository: CategoriaRepository) {
         val categoriaExistente = categoriaRepository.findById(id)
         return if (categoriaExistente.isPresent) {
             val actualizado = categoriaExistente.get().copy(
-                idCatg = catg.idCatg,
+                id = catg.id,
                 nombre = catg.nombre
             )
             ResponseEntity.ok(categoriaRepository.save(actualizado))

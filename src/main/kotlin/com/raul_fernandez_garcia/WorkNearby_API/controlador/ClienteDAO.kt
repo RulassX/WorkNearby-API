@@ -45,7 +45,7 @@ class ClienteDAO(private val clienteRepository: ClienteRepository) {
         val clienteExistente = clienteRepository.findById(id)
         return if (clienteExistente.isPresent) {
             val actualizado = clienteExistente.get().copy(
-                idUsr = cli.idUsr,
+                usuario = cli.usuario,
                 direccion = cli.direccion,
                 ciudad = cli.ciudad
             )

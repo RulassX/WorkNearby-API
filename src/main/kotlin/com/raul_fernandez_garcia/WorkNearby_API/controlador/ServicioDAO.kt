@@ -45,10 +45,10 @@ class ServicioDAO(private val servicioRepository: ServicioRepository) {
         val servicioExistente = servicioRepository.findById(id)
         return if (servicioExistente.isPresent) {
             val actualizado = servicioExistente.get().copy(
-                idSer = serv.idSer,
-                idCli = serv.idCli,
-                idTrab = serv.idTrab,
-                idCatg = serv.idCatg,
+                id = serv.id,
+                cliente = serv.cliente,
+                trabajador = serv.trabajador,
+                categoria = serv.categoria,
                 descripcion = serv.descripcion,
                 estado = serv.estado,
                 fechaSoli = serv.fechaSoli

@@ -7,11 +7,11 @@ import jakarta.persistence.*
 data class Trabajador(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val idTrab: Int = 0,
+    val id: Int = 0,
 
     @OneToOne
     @JoinColumn(name = "id_usuario")
-    val idUsr: Usuario,
+    val usuario: Usuario,
 
     val descripcion: String,
     val precioHora: Double,

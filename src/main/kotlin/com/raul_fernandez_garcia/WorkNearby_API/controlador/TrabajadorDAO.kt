@@ -38,7 +38,7 @@ class TrabajadorDAO(private val trabajadorRepository: TrabajadorRepository) {
         val trabajadorExistente = trabajadorRepository.findById(id)
         return if (trabajadorExistente.isPresent) {
             val actualizado = trabajadorExistente.get().copy(
-                idUsr = trab.idUsr,
+                usuario = trab.usuario,
                 descripcion = trab.descripcion,
                 precioHora = trab.precioHora,
                 radioKm = trab.radioKm,

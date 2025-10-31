@@ -11,6 +11,6 @@ data class TrabajadorCategoria(
 
 @Embeddable
 data class TrabajadorCategoriaId(
-    val idTrab: Int,
-    val idCatg: Int
+    val trabajador: Int,
+    val categoria: Int
 )

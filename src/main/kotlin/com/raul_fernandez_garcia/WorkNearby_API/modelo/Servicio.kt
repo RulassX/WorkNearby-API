@@ -8,19 +8,19 @@ import java.time.LocalDateTime
 data class Servicio(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val idSer: Int = 0,
+    val id: Int = 0,
 
     @ManyToOne
     @JoinColumn(name = "id_cliente")
-    val idCli: Cliente,
+    val cliente: Cliente,
 
     @ManyToOne
     @JoinColumn(name = "id_trabajador")
-    val idTrab: Trabajador,
+    val trabajador: Trabajador,
 
     @ManyToOne
     @JoinColumn(name = "id_categoria")
-    val idCatg: Categoria,
+    val categoria: Categoria,
 
     val descripcion: String,
     val estado: String = "pendiente",

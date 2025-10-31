@@ -45,9 +45,9 @@ class ResenaDAO(private val resenaRepository: ResenaRepository) {
         val resenaExistente = resenaRepository.findById(id)
         return if (resenaExistente.isPresent) {
             val actualizado = resenaExistente.get().copy(
-                idRes = res.idRes,
-                idCli = res.idCli,
-                idTrab = res.idTrab,
+                id = res.id,
+                cliente = res.cliente,
+                trabajador = res.trabajador,
                 puntuacion = res.puntuacion,
                 comentario = res.comentario,
                 fecha = res.fecha

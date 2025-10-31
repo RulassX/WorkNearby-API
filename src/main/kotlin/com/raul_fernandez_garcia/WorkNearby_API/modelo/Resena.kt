@@ -8,15 +8,15 @@ import java.time.LocalDateTime
 data class Resena(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val idRes: Int = 0,
+    val id: Int = 0,
 
     @ManyToOne
     @JoinColumn(name = "id_cliente")
-    val idCli: Cliente,
+    val cliente: Cliente,
 
     @ManyToOne
     @JoinColumn(name = "id_trabajador")
-    val idTrab: Trabajador,
+    val trabajador: Trabajador,
 
     val puntuacion: Int,
     val comentario: String,
