@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository
 
 @Repository
 interface TrabajadorCategoriaRepository : JpaRepository<TrabajadorCategoria, Int> {
-    fun findByTrabajadorId(idTrabajador: Int): List<TrabajadorCategoria>
-    fun findByCategoriaId(idCategoria: Int): List<TrabajadorCategoria>
+    fun findByIdTrabajador(idTrabajador: Int): List<TrabajadorCategoria>
+    fun findByIdCategoria(idCategoria: Int): List<TrabajadorCategoria>
 }
