@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Bean
 
 @SpringBootApplication
 class WorkNearbyApiApplication {
-
+/*
     @Bean
     fun insertarUsuario(usuarioRepository: UsuarioRepository) = CommandLineRunner {
         //Crear un nuevo usuario
@@ -42,6 +42,7 @@ class WorkNearbyApiApplication {
 
         println("Usuario insertado correctamente: ${newUsuario.nombre}")
     }
+        */
 }
 
 fun main(args: Array<String>) {
