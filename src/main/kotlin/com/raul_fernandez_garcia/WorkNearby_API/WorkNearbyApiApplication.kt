@@ -11,22 +11,36 @@ import org.springframework.context.annotation.Bean
 class WorkNearbyApiApplication {
 
     @Bean
-    fun init(usuarioRepository: UsuarioRepository) = CommandLineRunner {
+    fun insertarUsuario(usuarioRepository: UsuarioRepository) = CommandLineRunner {
         //Crear un nuevo usuario
-        val nuevoUsuario = Usuario(
+        val newUsuario = Usuario(
             id = 0,
             nombre = "Raul",
             apellidos = "Fernandez Garcia",
-            email = "raul@example.com",
+            email = "55raul@example.com",
             password = "1234",
             telefono = "600123456",
             rol = "cliente"
         )
 
-        //Guardarlo en la base de datos
-        usuarioRepository.save(nuevoUsuario)
+        if (newUsuario.nombre.isBlank() || newUsuario.apellidos.isBlank() ||
+            newUsuario.email.isBlank() || newUsuario.password.isBlank() ||
+            newUsuario.telefono.isBlank()
+        ) {
+            println("Error: todos los campos obligatorios deben estar rellenos.")
+            return@CommandLineRunner
+        }
 
-        println("Usuario insertado correctamente: ${nuevoUsuario.nombre}")
+        val usuarioExistente = usuarioRepository.findByEmail(newUsuario.email)
+        if (usuarioExistente != null) {
+            println("Error: ya existe un usuario con el correo ${newUsuario.email}")
+            return@CommandLineRunner
+        }
+
+        //Guardarlo en la base de datos
+        usuarioRepository.save(newUsuario)
+
+        println("Usuario insertado correctamente: ${newUsuario.nombre}")
     }
 }
 
@@ -41,6 +55,3 @@ fun main(args: Array<String>) {
     println(texto)
 
 }*/
-
-
-

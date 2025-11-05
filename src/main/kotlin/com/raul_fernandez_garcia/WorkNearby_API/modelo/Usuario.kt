@@ -8,6 +8,7 @@ import java.time.LocalDateTime
 data class Usuario(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_usuario")
     val id: Int = 0,
 
     val nombre: String,
@@ -17,6 +18,7 @@ data class Usuario(
     val password: String,
     val telefono: String,
     val rol: String,
+    @Column(name = "fecha_registro")
     val fechaReg: LocalDateTime = LocalDateTime.now()
 )
 
