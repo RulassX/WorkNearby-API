@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController
 
 @RestController
 @RequestMapping("/clientes")
-class ClienteDAO(private val clienteRepository: ClienteRepository) {
+class ClienteController(private val clienteRepository: ClienteRepository) {
 
     //Listar todos los clientes
     @GetMapping

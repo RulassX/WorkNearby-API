@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController
 
 @RestController
 @RequestMapping("/servicios")
-class ServicioDAO(private val servicioRepository: ServicioRepository) {
+class ServicioController(private val servicioRepository: ServicioRepository) {
 
     //Listar todos los servicios
     @GetMapping

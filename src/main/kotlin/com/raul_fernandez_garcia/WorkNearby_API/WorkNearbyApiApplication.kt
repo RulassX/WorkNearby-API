@@ -17,9 +17,9 @@ class WorkNearbyApiApplication {
             id = 0,
             nombre = "Raul",
             apellidos = "Fernandez Garcia",
-            email = "55raul@example.com",
+            email = "raul@example.com",
             password = "1234",
-            telefono = "600123456",
+            telefono = "123456789",
             rol = "cliente"
         )
 

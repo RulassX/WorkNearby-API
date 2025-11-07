@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController
 
 @RestController
 @RequestMapping("/categorias")
-class CategoriaDAO(private val categoriaRepository: CategoriaRepository) {
+class CategoriaController(private val categoriaRepository: CategoriaRepository) {
 
     //Listar todas las categorias
     @GetMapping

@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*
 
 @RestController
 @RequestMapping("/trabajadores")
-class TrabajadorDAO(private val trabajadorRepository: TrabajadorRepository) {
+class TrabajadorController(private val trabajadorRepository: TrabajadorRepository) {
 
     //Listar todos los trabajadores
     @GetMapping

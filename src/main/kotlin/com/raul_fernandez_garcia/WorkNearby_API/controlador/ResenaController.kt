@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController
 
 @RestController
 @RequestMapping("/reseñas")
-class ResenaDAO(private val resenaRepository: ResenaRepository) {
+class ResenaController(private val resenaRepository: ResenaRepository) {
 
     //Listar todas las reseñas
     @GetMapping
