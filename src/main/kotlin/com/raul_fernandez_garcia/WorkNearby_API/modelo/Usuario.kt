@@ -17,6 +17,8 @@ data class Usuario(
     val email: String,
     val password: String,
     val telefono: String,
+    @Column(name = "foto_perfil")
+    var fotoPerfil: String? = null,
     val rol: String,
     @Column(name = "fecha_registro")
     val fechaReg: LocalDateTime = LocalDateTime.now()

@@ -14,7 +14,9 @@ data class Cliente(
     val usuario: Usuario,
 
     val direccion: String,
-    val ciudad: String
+    val ciudad: String,
+    var latitud: Double? = null,
+    var longitud: Double? = null
 )
 
 

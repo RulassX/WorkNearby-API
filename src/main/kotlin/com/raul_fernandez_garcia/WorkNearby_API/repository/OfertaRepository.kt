@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository
 
 @Repository
 interface OfertaRepository : JpaRepository<Oferta, Long> {
-    fun findByTrabajadorId(trabajadorId: Long): List<Oferta>
-    fun findByCategoriaId(categoriaId: Long): List<Oferta>
-    fun findByTituloContainingIgnoreCase(titulo: String): List<Oferta>
+    fun findByTrabajadorId(trabajadorId: Int): List<Oferta>
+    fun findByCategoriaId(categoriaId: Int): List<Oferta>
+    fun findAllByOrderByFechaPublicacionDesc(): List<Oferta>
 }
