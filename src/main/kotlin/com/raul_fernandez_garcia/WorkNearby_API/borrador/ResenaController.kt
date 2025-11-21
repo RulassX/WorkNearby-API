@@ -1,4 +1,4 @@
-package com.raul_fernandez_garcia.WorkNearby_API.controlador
+package com.raul_fernandez_garcia.WorkNearby_API.borrador
 
 import com.raul_fernandez_garcia.WorkNearby_API.modelo.Resena
 import com.raul_fernandez_garcia.WorkNearby_API.repository.ResenaRepository

@@ -1,2 +1,4 @@
 package com.raul_fernandez_garcia.WorkNearby_API.controlador
 
+class MaestrosController {
+}
