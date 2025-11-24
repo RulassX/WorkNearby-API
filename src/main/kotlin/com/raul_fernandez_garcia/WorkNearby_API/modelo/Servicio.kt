@@ -23,6 +23,6 @@ data class Servicio(
     val categoria: Categoria,
 
     val descripcion: String,
-    val estado: String = "pendiente",
+    var estado: String = "pendiente",
     val fechaSoli: LocalDateTime = LocalDateTime.now()
 )
