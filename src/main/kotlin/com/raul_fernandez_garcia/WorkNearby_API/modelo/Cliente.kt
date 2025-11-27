@@ -7,15 +7,23 @@ import jakarta.persistence.*
 data class Cliente(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id: Int = 0,
+    @Column(name = "id_cliente")
+    var idCliente: Int? = null,
 
     @OneToOne
-    @JoinColumn(name = "id_usuario")
-    val usuario: Usuario,
+    @JoinColumn(name = "id_usuario", referencedColumnName = "id_usuario")
+    var usuario: Usuario,
 
-    val direccion: String,
-    val ciudad: String,
+    @Column(length = 150)
+    var direccion: String? = null,
+
+    @Column(length = 100)
+    var ciudad: String? = null,
+
+    @Column(precision = 10, scale = 7)
     var latitud: Double? = null,
+
+    @Column(precision = 10, scale = 7)
     var longitud: Double? = null
 )
 

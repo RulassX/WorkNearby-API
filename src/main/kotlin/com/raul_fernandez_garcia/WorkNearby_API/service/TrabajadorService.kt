@@ -15,14 +15,14 @@ class TrabajadorService(private val trabajadorRepository: TrabajadorRepository) 
         return convertirADTO(trabajador)
     }
 
-    // Aquí podrías añadir también un método para filtrar trabajadores por distancia
+    // Aquí podrías añadir también un metodo para filtrar trabajadores por distancia
     // igual que hicimos en OfertaService
 
     private fun convertirADTO(t: Trabajador): TrabajadorDTO {
         val urlFoto = if (t.usuario.fotoPerfil != null) "$BASE_URL/api/recursos/usuario/${t.usuario.id}/foto" else null
 
         return TrabajadorDTO(
-            idTrabajador = t.id!!,
+            id = t.id!!,
             nombre = t.usuario.nombre,
             apellidos = t.usuario.apellidos,
             email = t.usuario.email,

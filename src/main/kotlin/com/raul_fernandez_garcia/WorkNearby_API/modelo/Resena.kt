@@ -1,6 +1,7 @@
 package com.raul_fernandez_garcia.WorkNearby_API.modelo
 
 import jakarta.persistence.*
+import org.hibernate.annotations.CreationTimestamp
 import java.time.LocalDateTime
 
 @Entity
@@ -8,17 +9,24 @@ import java.time.LocalDateTime
 data class Resena(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id: Int = 0,
+    @Column(name = "id_resena")
+    var idResena: Int? = null,
 
     @ManyToOne
     @JoinColumn(name = "id_cliente")
-    val cliente: Cliente,
+    var cliente: Cliente,
 
     @ManyToOne
     @JoinColumn(name = "id_trabajador")
-    val trabajador: Trabajador,
+    var trabajador: Trabajador,
 
-    val puntuacion: Int,
-    val comentario: String,
-    val fecha: LocalDateTime = LocalDateTime.now()
+    @Column(nullable = false)
+    var puntuacion: Int,
+
+    @Column(length = 500)
+    var comentario: String? = null,
+
+    @CreationTimestamp
+    @Column(name = "fecha", updatable = false)
+    var fecha: LocalDateTime? = null
 )

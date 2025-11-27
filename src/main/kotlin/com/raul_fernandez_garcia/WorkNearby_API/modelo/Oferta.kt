@@ -1,35 +1,42 @@
 package com.raul_fernandez_garcia.WorkNearby_API.modelo
 
 import jakarta.persistence.*
+import org.hibernate.annotations.CreationTimestamp
+import java.math.BigDecimal
 import java.time.LocalDateTime
 
 @Entity
 @Table(name = "oferta")
 data class Oferta(
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id: Int = 0,
+    @Column(name = "id_oferta")
+    var idOferta: Int? = null,
 
     @ManyToOne
-    @JoinColumn(name = "trabajador_id")
+    @JoinColumn(name = "id_trabajador", nullable = false)
     var trabajador: Trabajador,
 
-    var titulo: String,
-    var descripcion: String,
-    var precio: Double? = null,
-
     @ManyToOne
-    @JoinColumn(name = "categoria_id")
+    @JoinColumn(name = "id_categoria")
     var categoria: Categoria? = null,
 
+    @Column(nullable = false, length = 100)
+    var titulo: String,
+
+    @Column(length = 500)
+    var descripcion: String? = null,
+
+    @Column(precision = 10, scale = 2)
+    var precio: BigDecimal? = null,
+
     @Lob
-    @Column(columnDefinition = "MEDIUMBLOB")
+    @Column(name = "foto", columnDefinition = "MEDIUMBLOB")
     var foto: ByteArray? = null,
 
-    @Column(name = "fecha_publicacion")
-    val fechaPublicacion: LocalDateTime = LocalDateTime.now()
-
+    @CreationTimestamp
+    @Column(name = "fecha_publicacion", updatable = false)
+    var fechaPublicacion: LocalDateTime? = null
 ) {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
@@ -37,27 +44,16 @@ data class Oferta(
 
         other as Oferta
 
-        if (id != other.id) return false
-        if (precio != other.precio) return false
-        if (trabajador != other.trabajador) return false
-        if (titulo != other.titulo) return false
-        if (descripcion != other.descripcion) return false
-        if (categoria != other.categoria) return false
-        if (!foto.contentEquals(other.foto)) return false
-        if (fechaPublicacion != other.fechaPublicacion) return false
+        if (idOferta == null || other.idOferta == null) return false
 
-        return true
+        return idOferta == other.idOferta
     }
 
     override fun hashCode(): Int {
-        var result = id
-        result = 31 * result + (precio?.hashCode() ?: 0)
-        result = 31 * result + trabajador.hashCode()
-        result = 31 * result + titulo.hashCode()
-        result = 31 * result + descripcion.hashCode()
-        result = 31 * result + (categoria?.hashCode() ?: 0)
-        result = 31 * result + (foto?.contentHashCode() ?: 0)
-        result = 31 * result + fechaPublicacion.hashCode()
-        return result
+        return javaClass.hashCode()
+    }
+
+    override fun toString(): String {
+        return "Oferta(id=$idOferta, titulo='$titulo', precio=$precio)"
     }
 }

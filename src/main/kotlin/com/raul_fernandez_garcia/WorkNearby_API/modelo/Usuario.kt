@@ -1,6 +1,7 @@
 package com.raul_fernandez_garcia.WorkNearby_API.modelo
 
 import jakarta.persistence.*
+import org.hibernate.annotations.CreationTimestamp
 import java.time.LocalDateTime
 
 @Entity
@@ -9,22 +10,33 @@ data class Usuario(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_usuario")
-    val id: Int = 0,
+    var idUsuario: Int? = null,
 
-    val nombre: String,
-    val apellidos: String,
-    @Column(unique = true)
-    val email: String,
-    val password: String,
-    val telefono: String,
+    @Column(nullable = false, length = 50)
+    var nombre: String,
+
+    @Column(nullable = false, length = 100)
+    var apellidos: String,
+
+    @Column(nullable = false, unique = true, length = 100)
+    var email: String,
+
+    @Column(nullable = false)
+    var password: String,
+
+    @Column(length = 15)
+    var telefono: String,
 
     @Lob
     @Column(name = "foto_perfil", columnDefinition = "MEDIUMBLOB")
-    val fotoPerfil: ByteArray? = null,
-    val rol: String,
-    @Column(name = "fecha_registro")
-    val fechaReg: LocalDateTime = LocalDateTime.now()
+    var fotoPerfil: ByteArray? = null,
 
+    @Column(length = 20)
+    var rol: String = "cliente",
+
+    @CreationTimestamp
+    @Column(name = "fecha_registro", updatable = false)
+    var fechaRegistro: LocalDateTime? = null
 ) {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
@@ -32,30 +44,17 @@ data class Usuario(
 
         other as Usuario
 
-        if (id != other.id) return false
-        if (nombre != other.nombre) return false
-        if (apellidos != other.apellidos) return false
-        if (email != other.email) return false
-        if (password != other.password) return false
-        if (telefono != other.telefono) return false
-        if (!fotoPerfil.contentEquals(other.fotoPerfil)) return false
-        if (rol != other.rol) return false
-        if (fechaReg != other.fechaReg) return false
+        if (idUsuario == null || other.idUsuario == null) return false
 
-        return true
+        return idUsuario == other.idUsuario
     }
 
     override fun hashCode(): Int {
-        var result = id
-        result = 31 * result + nombre.hashCode()
-        result = 31 * result + apellidos.hashCode()
-        result = 31 * result + email.hashCode()
-        result = 31 * result + password.hashCode()
-        result = 31 * result + telefono.hashCode()
-        result = 31 * result + (fotoPerfil?.contentHashCode() ?: 0)
-        result = 31 * result + rol.hashCode()
-        result = 31 * result + fechaReg.hashCode()
-        return result
+        return javaClass.hashCode()
+    }
+
+    override fun toString(): String {
+        return "Usuario(id=$idUsuario, email='$email', nombre='$nombre')"
     }
 }
 

@@ -13,10 +13,10 @@ class ResenaService(private val resenaRepository: ResenaRepository) {
         return resenas.map { r ->
             ResenaDTO(
                 id = r.id!!,
-                nombreCliente = r.cliente.usuario.nombre, // Solo nombre de pila por privacidad
+                nameCli = "${r.cliente.usuario.nombre} ${r.cliente.usuario.apellidos.first()}.",
                 puntuacion = r.puntuacion,
                 comentario = r.comentario,
-                fecha = r.fecha.toString()
+                fecha = r.fecha?.toLocalDate().toString()
             )
         }
     }

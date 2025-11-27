@@ -42,13 +42,20 @@ class ServicioService(
         }
 
         return lista.map { s ->
+            // Lógica para mostrar el nombre de la OTRA persona
+            val otroNombre = if (esTrabajador) {
+                "${s.cliente.usuario.nombre} ${s.cliente.usuario.apellidos}"
+            } else {
+                "${s.trabajador.usuario.nombre} ${s.trabajador.usuario.apellidos}"
+            }
+
             ServicioDTO(
                 id = s.id!!,
                 descripcion = s.descripcion,
                 estado = s.estado,
-                // Si soy trabajador, quiero ver el nombre del cliente, y viceversa
-                nombreOtroUsuario = if (esTrabajador) "${s.cliente.usuario.nombre}" else "${s.trabajador.usuario.nombre}",
-                fecha = s.fechaSolicitud.toString()
+                fechaSolicitud = s.fechaSoli.toLocalDate().toString(),
+                nombreOtroUsuario = otroNombre,
+                nombreCategoria = s.categoria?.nombre ?: "Sin categoría"
             )
         }
     }

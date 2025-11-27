@@ -1,29 +1,40 @@
 package com.raul_fernandez_garcia.WorkNearby_API.modelo
 
 import jakarta.persistence.*
+import java.math.BigDecimal
 
 @Entity
 @Table(name = "trabajador")
 data class Trabajador(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id: Int = 0,
+    @Column(name = "id_trabajador")
+    var idTrabajador: Int? = null,
 
     @OneToOne
-    @JoinColumn(name = "id_usuario")
-    val usuario: Usuario,
+    @JoinColumn(name = "id_usuario", referencedColumnName = "id_usuario")
+    var usuario: Usuario,
 
-    val descripcion: String,
-    val precioHora: Double,
-    val radioKm: Double,
-    val latitud: Double,
-    val longitud: Double,
+    @Column(length = 255)
+    var descripcion: String? = null,
 
-    @ManyToMany
+    @Column(name = "precio_hora", precision = 10, scale = 2)
+    var precioHora: BigDecimal? = null,
+
+    @Column(name = "radio_km", precision = 5, scale = 2)
+    var radioKm: BigDecimal? = null,
+
+    @Column(precision = 10, scale = 7)
+    var latitud: Double? = null,
+
+    @Column(precision = 10, scale = 7)
+    var longitud: Double? = null,
+
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
         name = "trabajador_categoria",
         joinColumns = [JoinColumn(name = "id_trabajador")],
         inverseJoinColumns = [JoinColumn(name = "id_categoria")]
     )
-    val categorias: List<Categoria> = listOf()
+    var categorias: MutableList<Categoria> = mutableListOf()
 )

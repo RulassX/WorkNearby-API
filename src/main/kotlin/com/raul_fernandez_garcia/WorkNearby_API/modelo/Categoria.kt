@@ -7,7 +7,9 @@ import jakarta.persistence.*
 data class Categoria(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id: Int = 0,
+    @Column(name = "id_categoria")
+    var idCategoria: Int? = null,
 
-    val nombre: String
+    @Column(nullable = false, unique = true, length = 100)
+    var nombre: String
 )
