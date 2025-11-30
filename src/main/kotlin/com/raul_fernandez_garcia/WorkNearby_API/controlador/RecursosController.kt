@@ -32,7 +32,7 @@ class RecursosController(
         if (oferta != null && oferta.foto != null) {
             return ResponseEntity.ok()
                 .contentType(MediaType.IMAGE_JPEG)
-                .body(oferta.foto.toByteArray())
+                .body(oferta.foto)
         }
         return ResponseEntity.notFound().build()
     }

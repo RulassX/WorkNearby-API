@@ -1,5 +1,6 @@
 package com.raul_fernandez_garcia.WorkNearby_API.controlador
 
+import com.raul_fernandez_garcia.WorkNearby_API.modeloDTO.RegistroDTO
 import com.raul_fernandez_garcia.WorkNearby_API.repository.UsuarioRepository
 import com.raul_fernandez_garcia.WorkNearby_API.service.AuthService
 import org.springframework.http.ResponseEntity
@@ -28,7 +29,7 @@ class AuthController(
     fun login(@RequestBody request: LoginRequest): ResponseEntity<Any> {
         val usuarioDTO = authService.buscarPorEmail(request.email)
 
-       val usuarioEntity = usuarioRepository.findByEmail(request.email).orElse(null)
+       val usuarioEntity = usuarioRepository.findByEmail(request.email)
 
         if (usuarioEntity != null && usuarioEntity.password == request.password) {
             return ResponseEntity.ok(usuarioDTO)

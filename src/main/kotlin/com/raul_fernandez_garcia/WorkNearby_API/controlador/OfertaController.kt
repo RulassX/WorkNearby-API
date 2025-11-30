@@ -1,5 +1,6 @@
 package com.raul_fernandez_garcia.WorkNearby_API.controlador
 
+import com.raul_fernandez_garcia.WorkNearby_API.modeloDTO.CrearOfertaDTO
 import com.raul_fernandez_garcia.WorkNearby_API.service.OfertaService
 import com.raul_fernandez_garcia.worknearby.modeloDTO.OfertaDTO
 import org.springframework.http.ResponseEntity

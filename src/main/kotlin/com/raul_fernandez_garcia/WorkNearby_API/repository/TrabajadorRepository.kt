@@ -7,6 +7,8 @@ import org.springframework.stereotype.Repository
 @Repository
 interface TrabajadorRepository : JpaRepository<Trabajador, Int> {
 
-    fun findByUsuarioId(idUsuario: Int): Trabajador?
-    fun findByCategoriasCategoria(idCategoria: Int): List<Trabajador>
+    fun findByUsuario_IdUsuario(idUsuario: Int): Trabajador?
+
+    //Aqui devuelve una List, que en Kotlin nunca es null (si no hay, devuelve lista vacia)
+    fun findByCategorias_IdCategoria(idCategoria: Int): List<Trabajador>
 }

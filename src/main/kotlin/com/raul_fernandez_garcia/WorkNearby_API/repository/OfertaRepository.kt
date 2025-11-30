@@ -5,8 +5,9 @@ import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.stereotype.Repository
 
 @Repository
-interface OfertaRepository : JpaRepository<Oferta, Long> {
-    fun findByTrabajadorId(trabajadorId: Int): List<Oferta>
-    fun findByCategoriaId(categoriaId: Int): List<Oferta>
+interface OfertaRepository : JpaRepository<Oferta, Int> {
+
     fun findAllByOrderByFechaPublicacionDesc(): List<Oferta>
+    fun findByTrabajador_IdTrabajador(idTrabajador: Int): List<Oferta>
+    fun findByCategoria_IdCategoria(idCategoria: Int): List<Oferta>
 }

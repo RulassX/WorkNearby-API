@@ -6,5 +6,7 @@ import org.springframework.stereotype.Repository
 
 @Repository
 interface ClienteRepository : JpaRepository<Cliente, Int> {
-    fun findByUsuarioId(idUsuario: Int): Cliente?
+
+    //Devuelve null si no encuentra el cliente asociado a ese usuario
+    fun findByUsuario_IdUsuario(idUsuario: Int): Cliente?
 }

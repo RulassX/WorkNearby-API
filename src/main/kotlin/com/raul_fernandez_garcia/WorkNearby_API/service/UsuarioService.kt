@@ -1,6 +1,9 @@
 package com.raul_fernandez_garcia.WorkNearby_API.service
 
+import com.raul_fernandez_garcia.WorkNearby_API.modelo.Cliente
+import com.raul_fernandez_garcia.WorkNearby_API.modelo.Trabajador
 import com.raul_fernandez_garcia.WorkNearby_API.modelo.Usuario
+import com.raul_fernandez_garcia.WorkNearby_API.modeloDTO.RegistroDTO
 import com.raul_fernandez_garcia.WorkNearby_API.repository.ClienteRepository
 import com.raul_fernandez_garcia.WorkNearby_API.repository.TrabajadorRepository
 import com.raul_fernandez_garcia.WorkNearby_API.repository.UsuarioRepository
@@ -14,11 +17,11 @@ class AuthService(
     private val clienteRepository: ClienteRepository,
     private val trabajadorRepository: TrabajadorRepository
 ) {
+    // Emulador: 10.0.2.2
+    // Móvil físico: IP local
+    private val BASE_URL = "http://10.0.2.2:8080"
 
-    // prueba con emulador esta ip: 10.0.2.2
-    private val BASE_URL = "http://192.168.1.138:8080"
-
-    @Transactional // Si falla algo, deshace todos los cambios en la BBDD
+    @Transactional
     fun registrarUsuario(datos: RegistroDTO): UsuarioDTO {
 
         if (usuarioRepository.existsByEmail(datos.email)) {
@@ -30,14 +33,14 @@ class AuthService(
             nombre = datos.nombre,
             apellidos = datos.apellidos,
             email = datos.email,
-            password = datos.password, // Recuerda: en producción usar BCrypt
+            password = datos.password,
             rol = datos.rol,
             telefono = datos.telefono,
-            fotoPerfil = null // La foto se suele subir en una petición aparte o decodificando Base64
+            fotoPerfil = null
         )
         val usuarioGuardado = usuarioRepository.save(usuario)
 
-        // 2. Guardar en la tabla específica según el rol
+        // 2. Guardar Rol específico
         if (datos.rol == "cliente") {
             val cliente = Cliente(
                 usuario = usuarioGuardado,
@@ -60,27 +63,26 @@ class AuthService(
             trabajadorRepository.save(trabajador)
         }
 
-        // 3. Devolver DTO
-        return generarUsuarioDTO(usuarioGuardado)
+        return convertirAUsuarioDTO(usuarioGuardado)
     }
 
     fun buscarPorEmail(email: String): UsuarioDTO? {
-        val usuario = usuarioRepository.findByEmail(email).orElse(null) ?: return null
-        return generarUsuarioDTO(usuario)
+        val usuario = usuarioRepository.findByEmail(email) ?: return null
+        return convertirAUsuarioDTO(usuario)
     }
 
-    // Helper para convertir Entity -> DTO con la URL de la imagen
-    private fun generarUsuarioDTO(u: Usuario): UsuarioDTO {
-        // Generamos la URL que apuntará al RecursosController
-        val urlFoto = if (u.fotoPerfil != null) "$BASE_URL/api/recursos/usuario/${u.id}/foto" else null
+    private fun convertirAUsuarioDTO(u: Usuario): UsuarioDTO {
+        val urlFoto = if (u.fotoPerfil != null) "$BASE_URL/api/recursos/usuario/${u.idUsuario}/foto" else null
 
         return UsuarioDTO(
-            id = u.id!!,
+            id = u.idUsuario!!,
             nombre = u.nombre,
             apellidos = u.apellidos,
             email = u.email,
+            telefono = u.telefono,
             rol = u.rol,
-            fotoUrl = urlFoto
+            fotoUrl = urlFoto,
+            fechaReg = u.fechaRegistro?.toString()
         )
     }
 }

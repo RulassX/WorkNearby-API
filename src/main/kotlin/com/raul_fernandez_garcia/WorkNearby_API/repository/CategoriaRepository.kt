@@ -6,5 +6,6 @@ import org.springframework.stereotype.Repository
 
 @Repository
 interface CategoriaRepository : JpaRepository<Categoria, Int> {
+    //Devuelve null si no existe la categoría con ese nombre
     fun findByNombre(nombre: String): Categoria?
 }

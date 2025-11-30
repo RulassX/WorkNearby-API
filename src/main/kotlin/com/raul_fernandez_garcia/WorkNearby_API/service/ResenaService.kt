@@ -8,12 +8,12 @@ import org.springframework.stereotype.Service
 class ResenaService(private val resenaRepository: ResenaRepository) {
 
     fun obtenerPorTrabajador(idTrabajador: Int): List<ResenaDTO> {
-        val resenas = resenaRepository.findByTrabajadorId(idTrabajador)
+        val resenas = resenaRepository.findByTrabajador_IdTrabajador(idTrabajador)
 
         return resenas.map { r ->
             ResenaDTO(
-                id = r.id!!,
-                nameCli = "${r.cliente.usuario.nombre} ${r.cliente.usuario.apellidos.first()}.",
+                id = r.idResena!!,
+                nombreCliente = "${r.cliente.usuario.nombre} ${r.cliente.usuario.apellidos.first()}.", // "Juan P."
                 puntuacion = r.puntuacion,
                 comentario = r.comentario,
                 fecha = r.fecha?.toLocalDate().toString()
