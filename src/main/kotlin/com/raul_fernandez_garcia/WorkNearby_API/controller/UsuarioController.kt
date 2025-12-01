@@ -1,40 +1,47 @@
 package com.raul_fernandez_garcia.WorkNearby_API.controller
 
-import com.raul_fernandez_garcia.WorkNearby_API.modeloDTO.RegistroDTO
-import com.raul_fernandez_garcia.WorkNearby_API.repository.UsuarioRepository
-import com.raul_fernandez_garcia.WorkNearby_API.service.UsuarioService
+import com.raul_fernandez_garcia.WorkNearby_API.service.ClienteService
+import com.raul_fernandez_garcia.worknearby.modeloDTO.ClienteDTO
 import org.springframework.http.ResponseEntity
-import org.springframework.web.bind.annotation.*
+import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.PathVariable
+import org.springframework.web.bind.annotation.PutMapping
+import org.springframework.web.bind.annotation.RequestBody
+import org.springframework.web.bind.annotation.RequestMapping
+import org.springframework.web.bind.annotation.RestController
 
 @RestController
-@RequestMapping("/api/user")
+@RequestMapping("/api/usuario")
 class UsuarioController(
-    private val usuarioService: UsuarioService,
-    private val usuarioRepository: UsuarioRepository
+    private val clienteService: ClienteService
 ) {
 
-    data class LoginRequest(val email: String, val password: String)
-
-    @PostMapping("/registro")
-    fun registrar(@RequestBody datos: RegistroDTO): ResponseEntity<Any> {
+    @GetMapping("/cliente/{idUsuario}")
+    fun obtenerPerfilCliente(@PathVariable idUsuario: Int): ResponseEntity<Any> {
         return try {
-            val usuarioCreado = usuarioService.registrarUsuario(datos)
-            ResponseEntity.ok(usuarioCreado)
+            val perfil = clienteService.obtenerPerfilPorUsuarioId(idUsuario)
+            ResponseEntity.ok(perfil)
         } catch (e: Exception) {
-            ResponseEntity.badRequest().body("Error: ${e.message}")
+            ResponseEntity.notFound().build()
         }
     }
 
-    @PostMapping("/login")
-    fun login(@RequestBody request: LoginRequest): ResponseEntity<Any> {
-        val usuarioDTO = usuarioService.buscarPorEmail(request.email)
-
-       val usuarioEntity = usuarioRepository.findByEmail(request.email)
-
-        if (usuarioEntity != null && usuarioEntity.password == request.password) {
-            return ResponseEntity.ok(usuarioDTO)
+    @PutMapping("/cliente/{idUsuario}")
+    fun actualizarPerfilCliente(
+        @PathVariable idUsuario: Int,
+        @RequestBody datos: ClienteDTO
+    ): ResponseEntity<Any> {
+        return try {
+            val actualizado = clienteService.actualizarPerfil(
+                idUsuario,
+                datos.direccion ?: "",
+                datos.ciudad ?: "",
+                datos.latitud,
+                datos.longitud
+            )
+            ResponseEntity.ok(actualizado)
+        } catch (e: Exception) {
+            ResponseEntity.badRequest().body("Error al actualizar")
         }
-
-        return ResponseEntity.status(401).body("Credenciales incorrectas")
     }
 }
