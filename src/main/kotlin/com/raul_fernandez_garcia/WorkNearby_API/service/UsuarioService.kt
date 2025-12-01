@@ -17,8 +17,8 @@ class UsuarioService(
     private val clienteRepository: ClienteRepository,
     private val trabajadorRepository: TrabajadorRepository
 ) {
-    // Emulador: 10.0.2.2
-    // Móvil físico: IP local
+    //Emulador: 10.0.2.2
+    //Móvil físico: IP local
     private val BASE_URL = "http://10.0.2.2:8080"
 
     @Transactional
@@ -28,7 +28,7 @@ class UsuarioService(
             throw RuntimeException("El email ya está registrado")
         }
 
-        // 1. Guardar Usuario base
+        //Guardar Usuario
         val usuario = Usuario(
             nombre = datos.nombre,
             apellidos = datos.apellidos,
@@ -40,7 +40,7 @@ class UsuarioService(
         )
         val usuarioGuardado = usuarioRepository.save(usuario)
 
-        // 2. Guardar Rol específico
+        //Guardar Rol específico
         if (datos.rol == "cliente") {
             val cliente = Cliente(
                 usuario = usuarioGuardado,

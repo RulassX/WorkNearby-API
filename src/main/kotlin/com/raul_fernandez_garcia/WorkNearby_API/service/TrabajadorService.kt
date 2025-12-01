@@ -19,7 +19,6 @@ class TrabajadorService(private val trabajadorRepository: TrabajadorRepository) 
         val u = t.usuario
         val urlFoto = if (u.fotoPerfil != null) "$BASE_URL/api/recursos/usuario/${u.idUsuario}/foto" else null
 
-        // Construimos el UsuarioDTO anidado
         val usuarioDTO = UsuarioDTO(
             id = u.idUsuario!!,
             nombre = u.nombre,
