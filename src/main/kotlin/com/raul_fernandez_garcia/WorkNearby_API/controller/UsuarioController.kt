@@ -2,14 +2,14 @@ package com.raul_fernandez_garcia.WorkNearby_API.controller
 
 import com.raul_fernandez_garcia.WorkNearby_API.modeloDTO.RegistroDTO
 import com.raul_fernandez_garcia.WorkNearby_API.repository.UsuarioRepository
-import com.raul_fernandez_garcia.WorkNearby_API.service.AuthService
+import com.raul_fernandez_garcia.WorkNearby_API.service.UsuarioService
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 
 @RestController
-@RequestMapping("/api/auth")
-class AuthController(
-    private val authService: AuthService,
+@RequestMapping("/api/user")
+class UsuarioController(
+    private val usuarioService: UsuarioService,
     private val usuarioRepository: UsuarioRepository
 ) {
 
@@ -18,7 +18,7 @@ class AuthController(
     @PostMapping("/registro")
     fun registrar(@RequestBody datos: RegistroDTO): ResponseEntity<Any> {
         return try {
-            val usuarioCreado = authService.registrarUsuario(datos)
+            val usuarioCreado = usuarioService.registrarUsuario(datos)
             ResponseEntity.ok(usuarioCreado)
         } catch (e: Exception) {
             ResponseEntity.badRequest().body("Error: ${e.message}")
@@ -27,7 +27,7 @@ class AuthController(
 
     @PostMapping("/login")
     fun login(@RequestBody request: LoginRequest): ResponseEntity<Any> {
-        val usuarioDTO = authService.buscarPorEmail(request.email)
+        val usuarioDTO = usuarioService.buscarPorEmail(request.email)
 
        val usuarioEntity = usuarioRepository.findByEmail(request.email)
 

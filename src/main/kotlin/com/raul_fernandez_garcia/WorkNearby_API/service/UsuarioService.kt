@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 
 @Service
-class AuthService(
+class UsuarioService(
     private val usuarioRepository: UsuarioRepository,
     private val clienteRepository: ClienteRepository,
     private val trabajadorRepository: TrabajadorRepository
