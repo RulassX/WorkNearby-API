@@ -43,13 +43,66 @@ Control de versiones: Git / GitHub.
     WorkNearby-API/
     ├─ src/
     │  ├─ main/
-    │  │  ├─ kotlin/com/raul_fernandez_garcia/Worknearby_API
-    │  │  │  ├─ WorkNearbyApiApplication.kt
-    │  │  │  ├─ ...
-    │  │  │
-    │  │  └─ resources/...
-    │  └─ test/...
+    │  │  ├─ kotlin/
+    │  │  │  └─ com/
+    │  │  │     └─ raul_fernandez_garcia/
+    │  │  │        └─ worknearby_api/
+    │  │  │           ├─ controller/
+    │  │  │           │  ├─ MaestrosController.kt
+    │  │  │           │  ├─ OfertaController.kt
+    │  │  │           │  ├─ RecursosController.kt
+    │  │  │           │  ├─ ServicioController.kt
+    │  │  │           │  ├─ TrabajadorController.kt
+    │  │  │           │  └─ UsuarioController.kt
+    │  │  │           ├─ modelo/
+    │  │  │           │  ├─ Categoria.kt
+    │  │  │           │  ├─ Cliente.kt
+    │  │  │           │  ├─ Oferta.kt
+    │  │  │           │  ├─ Resena.kt
+    │  │  │           │  ├─ Servicio.kt
+    │  │  │           │  ├─ Trabajador.kt
+    │  │  │           │  ├─ Trabajador_Categoria.kt
+    │  │  │           │  └─ Usuario.kt
+    │  │  │           ├─ modeloDTO/
+    │  │  │           │  ├─ CategoriaDTO.kt
+    │  │  │           │  ├─ ClienteDTO.kt
+    │  │  │           │  ├─ CrearOferta.kt
+    │  │  │           │  ├─ LoginRequest.kt
+    │  │  │           │  ├─ OfertaDTO.kt
+    │  │  │           │  ├─ RegistroDTO.kt
+    │  │  │           │  ├─ ResenaDTO.kt
+    │  │  │           │  ├─ ServicioDTO.kt
+    │  │  │           │  ├─ SolicitarServicioDTO.kt
+    │  │  │           │  ├─ TrabajadorCategoriaDTO.kt
+    │  │  │           │  ├─ TrabajadorDTO.kt
+    │  │  │           │  └─ UsuarioDTO.kt
+    │  │  │           ├─ repository/
+    │  │  │           │  ├─ CategoriaRepository.kt
+    │  │  │           │  ├─ ClienteRepository.kt
+    │  │  │           │  ├─ OfertaRepository.kt
+    │  │  │           │  ├─ ResenaRepository.kt
+    │  │  │           │  ├─ ServicioRepository.kt
+    │  │  │           │  ├─ TrabajadorRepository.kt
+    │  │  │           │  ├─ TrabCatgRepository.kt
+    │  │  │           │  └─ UsuarioRepository.kt
+    │  │  │           ├─ service/
+    │  │  │           │  ├─ ClienteService.kt
+    │  │  │           │  ├─ OfertaService.kt
+    │  │  │           │  ├─ ResenaService.kt
+    │  │  │           │  ├─ ServicioService.kt
+    │  │  │           │  ├─ TrabajadorService.kt
+    │  │  │           │  └─ UsuarioService.kt
+    │  │  │           └─ WorkNearbyApiApplication.kt
+    │  │  └─ resources/
+    │  │     ├─ static/
+    │  │     ├─ templates/
+    │  │     └─ application.properties
+    │  └─ test/
+    │     └─ kotlin/
+    │        └─ com/raul_fernandez_garcia/WorkNearby_API
+    │           └─ WorkNearbyApiApplicationTests.kt
     └─ README.md
+
 
 📊 Base de datos
 
