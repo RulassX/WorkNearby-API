@@ -1,4 +1,4 @@
-package com.raul_fernandez_garcia.WorkNearby_API.controlador
+package com.raul_fernandez_garcia.WorkNearby_API.controller
 
 import com.raul_fernandez_garcia.WorkNearby_API.modeloDTO.SolicitarServicioDTO
 import com.raul_fernandez_garcia.WorkNearby_API.service.ServicioService
