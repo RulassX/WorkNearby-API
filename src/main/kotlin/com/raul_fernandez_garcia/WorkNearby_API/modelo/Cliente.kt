@@ -20,10 +20,10 @@ data class Cliente(
     @Column(length = 100)
     var ciudad: String? = null,
 
-    @Column(precision = 10, scale = 7)
+    @Column
     var latitud: Double? = null,
 
-    @Column(precision = 10, scale = 7)
+    @Column
     var longitud: Double? = null
 )
 

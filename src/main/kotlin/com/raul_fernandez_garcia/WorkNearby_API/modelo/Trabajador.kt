@@ -24,10 +24,10 @@ data class Trabajador(
     @Column(name = "radio_km", precision = 5, scale = 2)
     var radioKm: BigDecimal? = null,
 
-    @Column(precision = 10, scale = 7)
+    @Column
     var latitud: Double? = null,
 
-    @Column(precision = 10, scale = 7)
+    @Column
     var longitud: Double? = null,
 
     @ManyToMany(fetch = FetchType.LAZY)
