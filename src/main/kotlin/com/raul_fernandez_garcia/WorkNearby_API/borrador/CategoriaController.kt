@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 
-
+/*
 @RestController
 @RequestMapping("/categorias")
 class CategoriaController(private val categoriaRepository: CategoriaRepository) {
@@ -46,7 +46,7 @@ class CategoriaController(private val categoriaRepository: CategoriaRepository) 
         val categoriaExistente = categoriaRepository.findById(id)
         return if (categoriaExistente.isPresent) {
             val actualizado = categoriaExistente.get().copy(
-                //id = catg.id,
+                id = catg.id,
                 nombre = catg.nombre
             )
             ResponseEntity.ok(categoriaRepository.save(actualizado))
@@ -67,3 +67,5 @@ class CategoriaController(private val categoriaRepository: CategoriaRepository) 
         }
     }
 }
+
+ */

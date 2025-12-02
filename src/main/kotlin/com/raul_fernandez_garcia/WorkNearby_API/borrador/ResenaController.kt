@@ -5,6 +5,7 @@ import com.raul_fernandez_garcia.WorkNearby_API.repository.ResenaRepository
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 
+/*
 @RestController
 @RequestMapping("/reseñas")
 class ResenaController(private val resenaRepository: ResenaRepository) {
@@ -62,3 +63,5 @@ class ResenaController(private val resenaRepository: ResenaRepository) {
         }
     }
 }
+
+ */

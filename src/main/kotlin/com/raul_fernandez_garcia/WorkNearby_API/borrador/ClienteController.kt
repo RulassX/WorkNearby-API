@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 
+/*
 @RestController
 @RequestMapping("/clientes")
 class ClienteController(private val clienteRepository: ClienteRepository) {
@@ -66,3 +67,5 @@ class ClienteController(private val clienteRepository: ClienteRepository) {
         }
     }
 }
+
+ */

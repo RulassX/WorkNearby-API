@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 
+/*
 @RestController
 @RequestMapping("/servicios")
 class ServicioController(private val servicioRepository: ServicioRepository) {
@@ -70,3 +71,5 @@ class ServicioController(private val servicioRepository: ServicioRepository) {
         }
     }
 }
+
+ */

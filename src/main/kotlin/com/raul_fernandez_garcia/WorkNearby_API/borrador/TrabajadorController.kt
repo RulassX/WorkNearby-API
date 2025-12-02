@@ -5,6 +5,7 @@ import com.raul_fernandez_garcia.WorkNearby_API.repository.TrabajadorRepository
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 
+/*
 @RestController
 @RequestMapping("/trabajadores")
 class TrabajadorController(private val trabajadorRepository: TrabajadorRepository) {
@@ -62,3 +63,5 @@ class TrabajadorController(private val trabajadorRepository: TrabajadorRepositor
         }
     }
 }
+
+ */

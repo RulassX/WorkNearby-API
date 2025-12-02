@@ -4,6 +4,7 @@ import com.raul_fernandez_garcia.WorkNearby_API.modelo.Oferta
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 
+/*
 @RestController
 @RequestMapping("/api/ofertas")
 class OfertaController(
@@ -42,3 +43,5 @@ class OfertaController(
     }
 }
 
+
+ */
