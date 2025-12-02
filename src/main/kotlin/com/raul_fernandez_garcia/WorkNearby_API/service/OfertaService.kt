@@ -17,7 +17,8 @@ class OfertaService(
     private val trabajadorRepository: TrabajadorRepository,
     private val categoriaRepository: CategoriaRepository
 ) {
-    private val BASE_URL = "http://10.0.2.2:8080"
+    //prueba con emulador: 10.0.2.2
+    private val BASE_URL = "http://192.168.1.134:8080"
 
     //LISTAR OFERTAS
     fun obtenerOfertasFiltradas(latCliente: Double?, lonCliente: Double?): List<OfertaDTO> {
