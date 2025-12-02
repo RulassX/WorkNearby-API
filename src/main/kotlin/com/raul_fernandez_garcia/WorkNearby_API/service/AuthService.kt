@@ -19,7 +19,7 @@ class AuthService(
 ) {
     //Emulador: 10.0.2.2
     //Móvil físico: IP local
-    private val BASE_URL = "http://192.168.1.134:8080"
+    private val BASE_URL = "http://192.168.1.1:8080"
 
     @Transactional
     fun registrarUsuario(datos: RegistroDTO): UsuarioDTO {
