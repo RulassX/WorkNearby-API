@@ -46,7 +46,7 @@ class CategoriaController(private val categoriaRepository: CategoriaRepository) 
         val categoriaExistente = categoriaRepository.findById(id)
         return if (categoriaExistente.isPresent) {
             val actualizado = categoriaExistente.get().copy(
-                id = catg.id,
+                //id = catg.id,
                 nombre = catg.nombre
             )
             ResponseEntity.ok(categoriaRepository.save(actualizado))

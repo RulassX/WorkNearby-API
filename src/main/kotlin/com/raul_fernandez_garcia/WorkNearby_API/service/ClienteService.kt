@@ -12,7 +12,7 @@ class ClienteService(
     private val clienteRepository: ClienteRepository
 ) {
     //móvil físico: ip local
-    private val BASE_URL = "http://192.168.1.1:8080"
+    private val BASE_URL = "http://192.168.1.134:8080"
 
     //OBTENER PERFIL
     fun obtenerPerfilPorUsuarioId(idUsuario: Int): ClienteDTO {
