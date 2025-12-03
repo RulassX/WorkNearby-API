@@ -55,7 +55,6 @@ class AuthService(
             val trabajador = Trabajador(
                 usuario = usuarioGuardado,
                 descripcion = datos.descripcion,
-                precioHora = datos.precioHora?.toBigDecimal(),
                 radioKm = datos.radioKm?.toBigDecimal(),
                 latitud = datos.latitud,
                 longitud = datos.longitud
