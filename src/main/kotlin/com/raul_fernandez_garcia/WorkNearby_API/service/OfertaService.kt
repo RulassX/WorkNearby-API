@@ -60,12 +60,19 @@ class OfertaService(
         return convertirADTO(ofertaRepository.save(nuevaOferta))
     }
 
+    fun buscarPorId(id: Int): OfertaDTO? {
+        val oferta = ofertaRepository.findByIdOrNull(id)
+
+        return oferta?.let { convertirADTO(it) }
+    }
+
     private fun convertirADTO(entidad: Oferta): OfertaDTO {
         val urlFotoOferta = if (entidad.foto != null) "$BASE_URL/api/recursos/oferta/${entidad.idOferta}/foto" else null
 
         //Sacamos la foto del perfil del trabajador
         val uTrabajador = entidad.trabajador.usuario
-        val urlFotoTrabajador = if (uTrabajador.fotoPerfil != null) "$BASE_URL/api/recursos/usuario/${uTrabajador.idUsuario}/foto" else null
+        val urlFotoTrabajador =
+            if (uTrabajador.fotoPerfil != null) "$BASE_URL/api/recursos/usuario/${uTrabajador.idUsuario}/foto" else null
 
         return OfertaDTO(
             id = entidad.idOferta!!,
@@ -87,7 +94,10 @@ class OfertaService(
         val R = 6371.0
         val dLat = Math.toRadians(lat2 - lat1)
         val dLon = Math.toRadians(lon2 - lon1)
-        val a = sin(dLat / 2) * sin(dLat / 2) + cos(Math.toRadians(lat1)) * cos(Math.toRadians(lat2)) * sin(dLon / 2) * sin(dLon / 2)
+        val a =
+            sin(dLat / 2) * sin(dLat / 2) + cos(Math.toRadians(lat1)) * cos(Math.toRadians(lat2)) * sin(dLon / 2) * sin(
+                dLon / 2
+            )
         val c = 2 * atan2(sqrt(a), sqrt(1 - a))
         return R * c
     }

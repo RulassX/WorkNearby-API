@@ -10,6 +10,17 @@ import org.springframework.web.bind.annotation.*
 @RequestMapping("/api/ofertas")
 class OfertaController(private val ofertaService: OfertaService) {
 
+    @GetMapping("/{id}")
+    fun obtenerOfertaPorId(@PathVariable id: Int): ResponseEntity<OfertaDTO> {
+        val oferta = ofertaService.buscarPorId(id)
+
+        return if (oferta != null) {
+            ResponseEntity.ok(oferta)
+        } else {
+            ResponseEntity.notFound().build()
+        }
+    }
+
     @GetMapping
     fun obtenerOfertas(
         @RequestParam(required = false) lat: Double?,
