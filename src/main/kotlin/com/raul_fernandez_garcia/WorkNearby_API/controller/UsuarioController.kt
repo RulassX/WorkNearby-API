@@ -1,6 +1,7 @@
 package com.raul_fernandez_garcia.WorkNearby_API.controller
 
 import com.raul_fernandez_garcia.WorkNearby_API.service.ClienteService
+import com.raul_fernandez_garcia.WorkNearby_API.service.TrabajadorService
 import com.raul_fernandez_garcia.worknearby.modeloDTO.ClienteDTO
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.GetMapping
@@ -13,7 +14,8 @@ import org.springframework.web.bind.annotation.RestController
 @RestController
 @RequestMapping("/api/usuario")
 class UsuarioController(
-    private val clienteService: ClienteService
+    private val clienteService: ClienteService,
+    private val trabajadorService: TrabajadorService
 ) {
 
     @GetMapping("/cliente/{idUsuario}")
@@ -42,6 +44,16 @@ class UsuarioController(
             ResponseEntity.ok(actualizado)
         } catch (e: Exception) {
             ResponseEntity.badRequest().body("Error al actualizar")
+        }
+    }
+
+    @GetMapping("/trabajador/{idUsuario}")
+    fun obtenerPerfilTrabajador(@PathVariable idUsuario: Int): ResponseEntity<Any> {
+        return try {
+            val perfil = trabajadorService.obtenerPerfilPorUsuarioId(idUsuario)
+            ResponseEntity.ok(perfil)
+        } catch (e: Exception) {
+            ResponseEntity.notFound().build()
         }
     }
 }

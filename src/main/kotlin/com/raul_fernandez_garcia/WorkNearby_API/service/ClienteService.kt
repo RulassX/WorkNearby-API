@@ -11,7 +11,7 @@ import org.springframework.transaction.annotation.Transactional
 class ClienteService(
     private val clienteRepository: ClienteRepository
 ) {
-    //móvil físico: ip local
+    //movil fisico: ip local
     private val BASE_URL = "http://192.168.1.134:8080"
 
     //OBTENER PERFIL
