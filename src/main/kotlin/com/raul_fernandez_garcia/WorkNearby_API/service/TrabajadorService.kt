@@ -34,7 +34,6 @@ class TrabajadorService(private val trabajadorRepository: TrabajadorRepository) 
             id = t.idTrabajador!!,
             usuario = usuarioDTO,
             descripcion = t.descripcion ?: "",
-            precioHora = t.precioHora?.toDouble() ?: 0.0,
             radioKm = t.radioKm?.toDouble() ?: 0.0,
             latitud = t.latitud ?: 0.0,
             longitud = t.longitud ?: 0.0

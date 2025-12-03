@@ -18,9 +18,6 @@ data class Trabajador(
     @Column(length = 255)
     var descripcion: String? = null,
 
-    @Column(name = "precio_hora", precision = 10, scale = 2)
-    var precioHora: BigDecimal? = null,
-
     @Column(name = "radio_km", precision = 5, scale = 2)
     var radioKm: BigDecimal? = null,
 

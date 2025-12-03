@@ -28,6 +28,7 @@ data class Oferta(
     var descripcion: String? = null,
 
     @Column(precision = 10, scale = 2)
+    @JoinColumn(name = "precio_hora")
     var precio: BigDecimal? = null,
 
     @Lob
