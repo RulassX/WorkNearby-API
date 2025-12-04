@@ -47,6 +47,7 @@ class UsuarioController(
         }
     }
 
+
     @GetMapping("/trabajador/{idUsuario}")
     fun obtenerPerfilTrabajador(@PathVariable idUsuario: Int): ResponseEntity<Any> {
         return try {
