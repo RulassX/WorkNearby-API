@@ -9,6 +9,7 @@ import com.raul_fernandez_garcia.worknearby.modeloDTO.OfertaDTO
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Service
 import java.time.LocalDateTime
+import java.util.Base64
 import kotlin.math.*
 
 @Service
@@ -44,10 +45,20 @@ class OfertaService(
 
     //CREAR OFERTA
     fun crearOferta(datos: CrearOfertaDTO): OfertaDTO {
-        val trabajador = trabajadorRepository.findByIdOrNull(datos.idTrabajador)
-            ?: throw RuntimeException("Trabajador no encontrado")
+        val trabajador = trabajadorRepository.findByUsuario_IdUsuario(datos.idTrabajador)
+            ?: throw RuntimeException("No se encontró perfil de trabajador")
 
         val categoria = datos.idCategoria?.let { categoriaRepository.findByIdOrNull(it) }
+
+        // 2. CONVERSION: String Base64 -> ByteArray
+        val fotoBytes = if (!datos.fotoUrlOferta.isNullOrEmpty()) {
+            try {
+                Base64.getDecoder().decode(datos.fotoUrlOferta)
+            } catch (e: Exception) {
+                e.printStackTrace()
+                null
+            }
+        } else null
 
         val nuevaOferta = Oferta(
             trabajador = trabajador,
@@ -56,7 +67,7 @@ class OfertaService(
             descripcion = datos.descripcion,
             precio = datos.precio?.toBigDecimal(),
             fechaPublicacion = LocalDateTime.now(),
-            foto = null
+            foto = fotoBytes
         )
         return convertirADTO(ofertaRepository.save(nuevaOferta))
     }
@@ -68,7 +79,9 @@ class OfertaService(
     }
 
     private fun convertirADTO(entidad: Oferta): OfertaDTO {
-        val urlFotoOferta = if (entidad.foto != null) "$BASE_URL/api/recursos/oferta/${entidad.idOferta}/foto" else null
+        val urlFotoOferta = if (entidad.foto != null)
+            "$BASE_URL/api/recursos/oferta/${entidad.idOferta}/foto"
+        else null
 
         //Sacamos la foto del perfil del trabajador
         val uTrabajador = entidad.trabajador.usuario
