@@ -1,5 +1,6 @@
 package com.raul_fernandez_garcia.WorkNearby_API.controller
 
+import com.raul_fernandez_garcia.WorkNearby_API.modeloDTO.CrearOfertaDTO
 import com.raul_fernandez_garcia.WorkNearby_API.modeloDTO.SolicitarServicioDTO
 import com.raul_fernandez_garcia.WorkNearby_API.service.ServicioService
 import com.raul_fernandez_garcia.worknearby.modeloDTO.ServicioDTO
@@ -10,14 +11,10 @@ import org.springframework.web.bind.annotation.*
 @RequestMapping("/api/servicios")
 class ServicioController(private val servicioService: ServicioService) {
 
-    @PostMapping("/solicitar")
-    fun solicitar(@RequestBody datos: SolicitarServicioDTO): ResponseEntity<String> {
-        val exito = servicioService.crearSolicitud(datos)
-        return if (exito) {
-            ResponseEntity.ok("Solicitud enviada correctamente")
-        } else {
-            ResponseEntity.badRequest().body("Error al crear solicitud")
-        }
+    @PostMapping
+    fun crearOferta(@RequestBody servicioDTO: SolicitarServicioDTO): ResponseEntity<ServicioDTO> {
+        val nuevoServicio = servicioService.crearSolicitud(servicioDTO)
+        return ResponseEntity.ok(nuevoServicio)
     }
 
     @GetMapping("/mis-contratos")

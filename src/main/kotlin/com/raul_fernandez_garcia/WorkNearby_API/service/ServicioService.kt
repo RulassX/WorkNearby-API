@@ -6,6 +6,7 @@ import com.raul_fernandez_garcia.WorkNearby_API.repository.CategoriaRepository
 import com.raul_fernandez_garcia.WorkNearby_API.repository.ClienteRepository
 import com.raul_fernandez_garcia.WorkNearby_API.repository.ServicioRepository
 import com.raul_fernandez_garcia.WorkNearby_API.repository.TrabajadorRepository
+import com.raul_fernandez_garcia.WorkNearby_API.repository.UsuarioRepository
 import com.raul_fernandez_garcia.worknearby.modeloDTO.ServicioDTO
 import jakarta.transaction.Transactional
 import org.springframework.data.repository.findByIdOrNull
@@ -17,26 +18,46 @@ class ServicioService(
     private val servicioRepository: ServicioRepository,
     private val clienteRepository: ClienteRepository,
     private val trabajadorRepository: TrabajadorRepository,
-    private val categoriaRepository: CategoriaRepository
+    private val categoriaRepository: CategoriaRepository,
+    private val usuarioRepository: UsuarioRepository
 ) {
 
     @Transactional
-    fun crearSolicitud(datos: SolicitarServicioDTO): Boolean {
-        val cliente = clienteRepository.findByIdOrNull(datos.idCliente) ?: return false
-        val trabajador = trabajadorRepository.findByIdOrNull(datos.idTrabajador) ?: return false
+    fun crearSolicitud(datos: SolicitarServicioDTO): ServicioDTO {
+        val userCliente = usuarioRepository.findByEmail(datos.emailCliente)
+            ?: throw RuntimeException("No existe ningún usuario con el email: ${datos.emailCliente}")
+
+        val cliente = clienteRepository.findByUsuario_IdUsuario(userCliente.idUsuario!!)
+            ?: throw RuntimeException("El usuario ${datos.emailCliente} no tiene perfil de cliente")
+
+
+        val trabajador = trabajadorRepository.findByUsuario_IdUsuario(datos.idTrabajador)
+            ?: throw RuntimeException("Trabajador no encontrado")
 
         val categoria = datos.idCategoria?.let { categoriaRepository.findByIdOrNull(it) }
 
-        val servicio = Servicio(
+        val nuevoServicio = Servicio(
             cliente = cliente,
             trabajador = trabajador,
             categoria = categoria,
             descripcion = datos.descripcion,
-            estado = "pendiente",
+            estado = datos.estado ?: "pendiente",
             fechaSolicitud = LocalDateTime.now()
         )
-        servicioRepository.save(servicio)
-        return true
+        return convertirADTO(servicioRepository.save(nuevoServicio))
+    }
+
+    private fun convertirADTO(servicio: Servicio): ServicioDTO {
+        val nombreCliente = "${servicio.cliente.usuario.nombre} ${servicio.cliente.usuario.apellidos}"
+
+        return ServicioDTO(
+            id = servicio.idServicio!!,
+            descripcion = servicio.descripcion,
+            estado = servicio.estado,
+            fechaSolicitud = servicio.fechaSolicitud?.toLocalDate().toString(),
+            nombreOtroUsuario = nombreCliente,
+            nombreCategoria = servicio.categoria?.nombre ?: "Varios"
+        )
     }
 
     fun listarContratos(idUsuario: Int, esTrabajador: Boolean): List<ServicioDTO> {
@@ -47,11 +68,11 @@ class ServicioService(
         }
 
         return lista.map { s ->
-            // Lógica de visualización: Si soy pintor, veo al cliente. Si soy cliente, veo al pintor.
+            // Logica de visualizacion: Si soy pintor, veo al cliente. Si soy cliente, veo al pintor.
             val otroNombre = if (esTrabajador) {
-                "${s.cliente.usuario.nombre} ${s.cliente.usuario.apellidos}"
+                "Cliente: ${s.cliente.usuario.nombre} ${s.cliente.usuario.apellidos}"
             } else {
-                "${s.trabajador.usuario.nombre} ${s.trabajador.usuario.apellidos}"
+                "Trabajador: ${s.trabajador.usuario.nombre} ${s.trabajador.usuario.apellidos}"
             }
 
             ServicioDTO(
