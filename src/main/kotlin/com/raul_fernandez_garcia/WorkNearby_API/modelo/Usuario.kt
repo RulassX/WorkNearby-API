@@ -18,6 +18,9 @@ data class Usuario(
     @Column(nullable = false, length = 100)
     var apellidos: String,
 
+    @Column(name = "fcm_token") // Puede ser NULL al principio
+    var fcmToken: String? = null,
+
     @Column(nullable = false, unique = true, length = 100)
     var email: String,
 
