@@ -12,7 +12,7 @@ class ClienteService(
     private val clienteRepository: ClienteRepository
 ) {
     //movil fisico: ip local
-    private val BASE_URL = "http://192.168.1.136:8080"
+    private val BASE_URL = "http://192.168.1.139:8080"
     //private val BASE_URL = "http://192.168.0.20:8080"
     //private val BASE_URL = "http://192.168.0.15:8080"
 

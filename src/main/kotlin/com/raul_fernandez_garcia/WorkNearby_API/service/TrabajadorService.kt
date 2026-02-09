@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service
 @Service
 class TrabajadorService(private val trabajadorRepository: TrabajadorRepository) {
 
-    private val BASE_URL = "http://192.168.1.136:8080"
+    private val BASE_URL = "http://192.168.1.139:8080"
     //private val BASE_URL = "http://192.168.0.20:8080"
     //private val BASE_URL = "http://192.168.0.15:8080"
 
