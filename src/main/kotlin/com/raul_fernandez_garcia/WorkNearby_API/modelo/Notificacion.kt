@@ -12,7 +12,7 @@ data class Notificacion(
     val idNotificacion: Int = 0,
 
     @Column(name = "id_usuario")
-    val idUsuario: Int, // FK: Quien recibe la notificacion
+    val idUsuario: Int,
 
     val titulo: String,
     val mensaje: String,
