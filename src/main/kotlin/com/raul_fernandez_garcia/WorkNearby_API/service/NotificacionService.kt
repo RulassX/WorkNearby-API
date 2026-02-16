@@ -15,7 +15,7 @@ class NotificacionService(
     private val usuarioRepository: UsuarioRepository // Necesario para buscar el Token
 ) {
 
-    // Metodo principal: Guarda en DB y envía Push
+    // Metodo principal: Guarda en DB y envia Push
     @Transactional
     fun crearYEnviarNotificacion(idUsuarioDestino: Int, titulo: String, mensaje: String) {
 
@@ -37,7 +37,7 @@ class NotificacionService(
         }
     }
 
-    // Lógica privada de Firebase
+    // Logica privada de Firebase
     private fun enviarPushAFirebase(token: String, titulo: String, body: String) {
         try {
             val message = Message.builder()
@@ -58,12 +58,12 @@ class NotificacionService(
         }
     }
 
-    // Obtener historial para la pantalla de "Buzón"
+    // Obtener historial para la pantalla de "Buzon"
     fun obtenerHistorial(idUsuario: Int): List<Notificacion> {
         return notificacionRepository.findByIdUsuarioOrderByFechaEnvioDesc(idUsuario)
     }
 
-    // Marcar como leída
+    // Marcar como leida
     fun marcarComoLeida(idNotificacion: Int) {
         val notif = notificacionRepository.findById(idNotificacion).orElse(null)
         if (notif != null) {

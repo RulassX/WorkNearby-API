@@ -18,7 +18,7 @@ class NotificacionController(
         return ResponseEntity.ok(lista)
     }
 
-    // PATCH: Marcar una notificación como leída (al pulsar sobre ella)
+    // PATCH: Marcar una notificacion como leida (al pulsar sobre ella)
     @PatchMapping("/{id}/leer")
     fun marcarLeida(@PathVariable id: Int): ResponseEntity<Unit> {
         notificacionService.marcarComoLeida(id)
