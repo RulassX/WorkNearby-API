@@ -2,6 +2,7 @@ package com.raul_fernandez_garcia.WorkNearby_API.controller
 
 import com.raul_fernandez_garcia.WorkNearby_API.modelo.Notificacion
 import com.raul_fernandez_garcia.WorkNearby_API.service.NotificacionService
+import com.raul_fernandez_garcia.worknearby.modeloDTO.CrearNotificacionDTO
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 
@@ -10,6 +11,20 @@ import org.springframework.web.bind.annotation.*
 class NotificacionController(
     private val notificacionService: NotificacionService
 ) {
+
+    @PostMapping("/enviar")
+    fun crearNotificacion(@RequestBody dto: CrearNotificacionDTO): ResponseEntity<String> {
+        return try {
+            notificacionService.crearYEnviarNotificacion(
+                idUsuarioDestino = dto.idUsuario,
+                titulo = dto.titulo,
+                mensaje = dto.mensaje
+            )
+            ResponseEntity.ok("Notificación creada y enviada correctamente")
+        } catch (e: Exception) {
+            ResponseEntity.internalServerError().body("Error: ${e.message}")
+        }
+    }
 
     // GET: Obtener lista de notificaciones de un usuario
     @GetMapping("/{idUsuario}")
