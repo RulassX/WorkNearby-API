@@ -60,8 +60,8 @@ class NotificacionService(
     }
 
     // Obtener historial para la pantalla de "Buzon"
-    fun obtenerHistorial(idUsuario: Int): List<Notificacion> {
-        return notificacionRepository.findByIdUsuarioOrderByFechaEnvioDesc(idUsuario)
+    fun obtenerHistorial(idReceptor: Int): List<Notificacion> {
+        return notificacionRepository.findByIdReceptorOrderByFechaEnvioDesc(idReceptor)
     }
 
     // Marcar como leida
