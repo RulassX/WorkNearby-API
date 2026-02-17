@@ -17,11 +17,12 @@ class NotificacionService(
 
     // Metodo principal: Guarda en DB y envia Push
     @Transactional
-    fun crearYEnviarNotificacion(idUsuarioDestino: Int, titulo: String, mensaje: String) {
+    fun crearYEnviarNotificacion(idUsuarioDestino: Int, idUsuarioOrigen: Int, titulo: String, mensaje: String) {
 
         // 1. Guardar en MySQL (Historial)
         val nuevaNotif = Notificacion(
-            idUsuario = idUsuarioDestino,
+            idReceptor = idUsuarioDestino,
+            idEmisor = idUsuarioOrigen,
             titulo = titulo,
             mensaje = mensaje,
             leido = false

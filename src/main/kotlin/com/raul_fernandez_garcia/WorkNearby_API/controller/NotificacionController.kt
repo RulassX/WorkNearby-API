@@ -16,7 +16,8 @@ class NotificacionController(
     fun crearNotificacion(@RequestBody dto: CrearNotificacionDTO): ResponseEntity<String> {
         return try {
             notificacionService.crearYEnviarNotificacion(
-                idUsuarioDestino = dto.idUsuario,
+                idUsuarioDestino = dto.idReceptor,
+                idUsuarioOrigen = dto.idEmisor,
                 titulo = dto.titulo,
                 mensaje = dto.mensaje
             )

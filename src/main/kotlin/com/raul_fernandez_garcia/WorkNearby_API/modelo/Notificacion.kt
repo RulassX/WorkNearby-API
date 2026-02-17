@@ -11,8 +11,13 @@ data class Notificacion(
     @Column(name = "id_notificacion")
     val idNotificacion: Int = 0,
 
-    @Column(name = "id_usuario")
-    val idUsuario: Int,
+    // ID del usuario que envia
+    @Column(name = "id_emisor")
+    val idEmisor: Int,
+
+    // ID del usuario que recive
+    @Column(name = "id_receptor")
+    val idReceptor: Int,
 
     val titulo: String,
     val mensaje: String,
