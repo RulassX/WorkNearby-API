@@ -8,8 +8,8 @@ import org.springframework.stereotype.Repository
 interface NotificacionRepository : JpaRepository<Notificacion, Int> {
 
     // Buscar todas las notificaciones de un usuario ordenadas por fecha (las nuevas primero)
-    fun findByIdUsuarioOrderByFechaEnvioDesc(idUsuario: Int): List<Notificacion>
+    fun findByIdReceptorOrderByFechaEnvioDesc(idReceptor: Int): List<Notificacion>
 
     // Opcional: Contar cuantas tiene sin leer (útil para poner un numerito rojo en el icono)
-    fun countByIdUsuarioAndLeidoFalse(idUsuario: Int): Long
+    fun countByIdReceptorAndLeidoFalse(idReceptor: Int): Long
 }
