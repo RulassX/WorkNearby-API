@@ -35,4 +35,14 @@ class OfertaController(private val ofertaService: OfertaService) {
         val nuevaOferta = ofertaService.crearOferta(ofertaDTO)
         return ResponseEntity.ok(nuevaOferta)
     }
+
+    @DeleteMapping("/{id}")
+    fun eliminarOferta(@PathVariable id: Int): ResponseEntity<Void> {
+        val eliminado = ofertaService.borrarOferta(id)
+        return if (eliminado) {
+            ResponseEntity.noContent().build() // Retorna 204 (Éxito sin contenido)
+        } else {
+            ResponseEntity.notFound().build()  // Retorna 404 si la oferta no existe
+        }
+    }
 }

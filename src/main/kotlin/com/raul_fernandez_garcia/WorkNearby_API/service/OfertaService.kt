@@ -73,6 +73,15 @@ class OfertaService(
         return convertirADTO(ofertaRepository.save(nuevaOferta))
     }
 
+    fun borrarOferta(id: Int): Boolean {
+        return if (ofertaRepository.existsById(id)) {
+            ofertaRepository.deleteById(id)
+            true
+        } else {
+            false
+        }
+    }
+
     fun buscarPorId(id: Int): OfertaDTO? {
         val oferta = ofertaRepository.findByIdOrNull(id)
 
