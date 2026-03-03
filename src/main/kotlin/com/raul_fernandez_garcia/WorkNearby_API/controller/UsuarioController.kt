@@ -4,6 +4,7 @@ import com.raul_fernandez_garcia.WorkNearby_API.repository.UsuarioRepository
 import com.raul_fernandez_garcia.WorkNearby_API.service.ClienteService
 import com.raul_fernandez_garcia.WorkNearby_API.service.TrabajadorService
 import com.raul_fernandez_garcia.worknearby.modeloDTO.ClienteDTO
+import com.raul_fernandez_garcia.worknearby.modeloDTO.TrabajadorDTO
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
@@ -20,6 +21,36 @@ class UsuarioController(
     private val trabajadorService: TrabajadorService,
     private val usuarioRepository: UsuarioRepository
 ) {
+    @GetMapping("/trabajador/{idUsuario}")
+    fun obtenerPerfilTrabajador(@PathVariable idUsuario: Int): ResponseEntity<Any> {
+        return try {
+            val perfil = trabajadorService.obtenerPerfilPorUsuarioId(idUsuario)
+            ResponseEntity.ok(perfil)
+        } catch (e: Exception) {
+            ResponseEntity.notFound().build()
+        }
+    }
+
+    @PutMapping("/trabajador/{idUsuario}")
+    fun actualizarPerfilTrabajador(
+        @PathVariable idUsuario: Int,
+        @RequestBody datos: TrabajadorDTO
+    ): ResponseEntity<Any> {
+        return try {
+            val actualizado = trabajadorService.actualizarPerfilTrab(
+                idUsuario,
+                datos.usuario.nombre,
+                datos.usuario.apellidos,
+                datos.usuario.telefono,
+                datos.usuario.fotoUrl,
+                datos.descripcion ?: "",
+                datos.radioKm ?: 0.0
+            )
+            ResponseEntity.ok(actualizado)
+        } catch (e: Exception) {
+            ResponseEntity.badRequest().body("Error al actualizar trabajador: ${e.message}")
+        }
+    }
 
     @GetMapping("/cliente/{idUsuario}")
     fun obtenerPerfilCliente(@PathVariable idUsuario: Int): ResponseEntity<Any> {
@@ -37,27 +68,19 @@ class UsuarioController(
         @RequestBody datos: ClienteDTO
     ): ResponseEntity<Any> {
         return try {
-            val actualizado = clienteService.actualizarPerfil(
+            // Ahora pasamos también los datos del objeto 'usuario' que viene dentro de ClienteDTO
+            val actualizado = clienteService.actualizarPerfilCli(
                 idUsuario,
+                datos.usuario.nombre,
+                datos.usuario.apellidos,
+                datos.usuario.telefono,
+                datos.usuario.fotoUrl, // El String Base64
                 datos.direccion ?: "",
-                datos.ciudad ?: "",
-                datos.latitud,
-                datos.longitud
+                datos.ciudad ?: ""
             )
             ResponseEntity.ok(actualizado)
         } catch (e: Exception) {
-            ResponseEntity.badRequest().body("Error al actualizar")
-        }
-    }
-
-
-    @GetMapping("/trabajador/{idUsuario}")
-    fun obtenerPerfilTrabajador(@PathVariable idUsuario: Int): ResponseEntity<Any> {
-        return try {
-            val perfil = trabajadorService.obtenerPerfilPorUsuarioId(idUsuario)
-            ResponseEntity.ok(perfil)
-        } catch (e: Exception) {
-            ResponseEntity.notFound().build()
+            ResponseEntity.badRequest().body("Error al actualizar cliente: ${e.message}")
         }
     }
 

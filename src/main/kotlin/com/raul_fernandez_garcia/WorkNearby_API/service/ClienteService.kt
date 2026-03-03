@@ -2,14 +2,17 @@ package com.raul_fernandez_garcia.WorkNearby_API.service
 
 import com.raul_fernandez_garcia.WorkNearby_API.modelo.Cliente
 import com.raul_fernandez_garcia.WorkNearby_API.repository.ClienteRepository
+import com.raul_fernandez_garcia.WorkNearby_API.repository.UsuarioRepository
 import com.raul_fernandez_garcia.worknearby.modeloDTO.ClienteDTO
 import com.raul_fernandez_garcia.worknearby.modeloDTO.UsuarioDTO
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
+import java.util.Base64
 
 @Service
 class ClienteService(
-    private val clienteRepository: ClienteRepository
+    private val clienteRepository: ClienteRepository,
+    private val usuarioRepository: UsuarioRepository
 ) {
     //movil fisico: ip local
     //private val BASE_URL = "http://192.168.1.139:8080"
@@ -22,30 +25,6 @@ class ClienteService(
             ?: throw RuntimeException("Perfil de cliente no encontrado para el usuario $idUsuario")
 
         return convertirADTO(cliente)
-    }
-
-    //ACTUALIZAR PERFIL
-    @Transactional
-    fun actualizarPerfil(
-        idUsuario: Int,
-        direccion: String,
-        ciudad: String,
-        lat: Double,
-        lon: Double
-    ): ClienteDTO {
-        val cliente = clienteRepository.findByUsuario_IdUsuario(idUsuario)
-            ?: throw RuntimeException("Cliente no encontrado")
-
-        //Actualizamos los datos especificos de la tabla 'cliente'
-        cliente.direccion = direccion
-        cliente.ciudad = ciudad
-        cliente.latitud = lat
-        cliente.longitud = lon
-
-        //Guardamos los cambios
-        val clienteActualizado = clienteRepository.save(cliente)
-
-        return convertirADTO(clienteActualizado)
     }
 
     private fun convertirADTO(c: Cliente): ClienteDTO {
@@ -72,5 +51,37 @@ class ClienteService(
             latitud = c.latitud ?: 0.0,
             longitud = c.longitud ?: 0.0
         )
+    }
+
+    //ACTUALIZAR PERFIL
+    @Transactional // IMPORTANTE: Para que si falla algo, no se guarde nada a medias
+    fun actualizarPerfilCli(
+        idUsuario: Int,
+        nombre: String,
+        apellidos: String,
+        telefono: String,
+        fotoUrlBase64: String?,
+        direccion: String,
+        ciudad: String
+    ): Cliente {
+        val cliente = clienteRepository.findByUsuario_IdUsuario(idUsuario)
+            ?: throw Exception("Cliente no encontrado")
+
+        val usuario = cliente.usuario
+        usuario.nombre = nombre
+        usuario.apellidos = apellidos
+        usuario.telefono = telefono
+
+        if (!fotoUrlBase64.isNullOrBlank()) {
+            val cleanBase64 = fotoUrlBase64.substringAfter("base64,")
+            usuario.fotoPerfil = Base64.getDecoder().decode(cleanBase64)
+        }
+
+        usuarioRepository.save(usuario)
+
+        cliente.direccion = direccion
+        cliente.ciudad = ciudad
+
+        return clienteRepository.save(cliente)
     }
 }
