@@ -44,7 +44,7 @@ class UsuarioController(
                 datos.usuario.telefono,
                 datos.usuario.fotoUrl,
                 datos.descripcion ?: "",
-                datos.radioKm ?: 0.0
+                datos.radioKm
             )
             ResponseEntity.ok(actualizado)
         } catch (e: Exception) {
@@ -75,8 +75,8 @@ class UsuarioController(
                 datos.usuario.apellidos,
                 datos.usuario.telefono,
                 datos.usuario.fotoUrl, // El String Base64
-                datos.direccion ?: "",
-                datos.ciudad ?: ""
+                datos.direccion,
+                datos.ciudad
             )
             ResponseEntity.ok(actualizado)
         } catch (e: Exception) {
