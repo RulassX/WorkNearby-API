@@ -12,7 +12,7 @@ class TrabajadorService(private val trabajadorRepository: TrabajadorRepository) 
 
     //private val BASE_URL = "http://192.168.1.139:8080"
     //private val BASE_URL = "http://192.168.0.20:8080"
-    private val BASE_URL = "http://192.168.0.12:8080"
+    private val BASE_URL = "http://192.168.1.131:8080"
 
     // CASO 1: Para ver el detalle desde una oferta
     fun obtenerTrabajadorPorId(id: Int): TrabajadorDTO {
