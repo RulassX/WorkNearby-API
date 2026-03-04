@@ -37,6 +37,19 @@ class AuthService(
         //esto seria para encriptar la contraseña
         //val passwordHasheada = encoder.encode(datos.password)
 
+        // Convertimos la foto de String (Base64) a ByteArray
+        val fotoBytes = if (!datos.fotoUrl.isNullOrBlank()) {
+            try {
+                // Limpiamos el prefijo si existe y decodificamos
+                val base64Limpio = datos.fotoUrl!!.substringAfter("base64,")
+                java.util.Base64.getDecoder().decode(base64Limpio)
+            } catch (e: Exception) {
+                null // O manejar el error de formato
+            }
+        } else {
+            null
+        }
+
         //Guardar Usuario
         val usuario = Usuario(
             nombre = datos.nombre,
@@ -46,11 +59,11 @@ class AuthService(
             //password = passwordHasheada,
             rol = datos.rol,
             telefono = datos.telefono,
-            fotoPerfil = null
+            fotoPerfil = fotoBytes
         )
         val usuarioGuardado = usuarioRepository.save(usuario)
 
-        //Guardar Rol específico
+        //Guardar Rol especifico
         if (datos.rol == "cliente") {
             val cliente = Cliente(
                 usuario = usuarioGuardado,
