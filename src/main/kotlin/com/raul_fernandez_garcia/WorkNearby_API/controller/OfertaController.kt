@@ -40,9 +40,9 @@ class OfertaController(private val ofertaService: OfertaService) {
     fun eliminarOferta(@PathVariable id: Int): ResponseEntity<Void> {
         val eliminado = ofertaService.borrarOferta(id)
         return if (eliminado) {
-            ResponseEntity.noContent().build() // Retorna 204 (Éxito sin contenido)
+            ResponseEntity.noContent().build() // Retorna 204 (Exito sin contenido)
         } else {
-            ResponseEntity.notFound().build()  // Retorna 404 si la oferta no existe
+            ResponseEntity.notFound().build()  // Retorna 404 si el sercicio no existe
         }
     }
 }

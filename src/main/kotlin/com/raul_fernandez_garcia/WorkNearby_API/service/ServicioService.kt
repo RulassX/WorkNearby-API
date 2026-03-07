@@ -34,7 +34,7 @@ class ServicioService(
         val trabajador = trabajadorRepository.findByUsuario_IdUsuario(datos.idTrabajador)
             ?: throw RuntimeException("Trabajador no encontrado")
 
-        val categoria = datos.idCategoria?.let { categoriaRepository.findByIdOrNull(it) }
+        val categoria = datos.idCategoria.let { categoriaRepository.findByIdOrNull(it) }
 
         val nuevoServicio = Servicio(
             cliente = cliente,
@@ -47,6 +47,7 @@ class ServicioService(
         return convertirADTO(servicioRepository.save(nuevoServicio))
     }
 
+    @Transactional
     fun borrarContrato(id: Int): Boolean {
         return if (servicioRepository.existsById(id)) {
             servicioRepository.deleteById(id)
