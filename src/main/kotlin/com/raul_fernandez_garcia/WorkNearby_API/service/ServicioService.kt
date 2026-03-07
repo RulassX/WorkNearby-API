@@ -47,6 +47,15 @@ class ServicioService(
         return convertirADTO(servicioRepository.save(nuevoServicio))
     }
 
+    fun borrarContrato(id: Int): Boolean {
+        return if (servicioRepository.existsById(id)) {
+            servicioRepository.deleteById(id)
+            true
+        } else {
+            false
+        }
+    }
+
     private fun convertirADTO(servicio: Servicio): ServicioDTO {
         val nombreCliente = "${servicio.cliente.usuario.nombre} ${servicio.cliente.usuario.apellidos}"
 

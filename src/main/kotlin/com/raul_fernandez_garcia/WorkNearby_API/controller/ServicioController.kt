@@ -1,6 +1,5 @@
 package com.raul_fernandez_garcia.WorkNearby_API.controller
 
-import com.raul_fernandez_garcia.WorkNearby_API.modeloDTO.CrearOfertaDTO
 import com.raul_fernandez_garcia.WorkNearby_API.modeloDTO.SolicitarServicioDTO
 import com.raul_fernandez_garcia.WorkNearby_API.service.ServicioService
 import com.raul_fernandez_garcia.worknearby.modeloDTO.ServicioDTO
@@ -12,7 +11,7 @@ import org.springframework.web.bind.annotation.*
 class ServicioController(private val servicioService: ServicioService) {
 
     @PostMapping
-    fun crearOferta(@RequestBody servicioDTO: SolicitarServicioDTO): ResponseEntity<ServicioDTO> {
+    fun crearContrato(@RequestBody servicioDTO: SolicitarServicioDTO): ResponseEntity<ServicioDTO> {
         val nuevoServicio = servicioService.crearSolicitud(servicioDTO)
         return ResponseEntity.ok(nuevoServicio)
     }
@@ -24,5 +23,15 @@ class ServicioController(private val servicioService: ServicioService) {
     ): ResponseEntity<List<ServicioDTO>> {
         val contratos = servicioService.listarContratos(idUsuario, esTrabajador)
         return ResponseEntity.ok(contratos)
+    }
+
+    @DeleteMapping("/{id}")
+    fun eliminarContrato(@PathVariable id: Int): ResponseEntity<Void> {
+        val eliminado = servicioService.borrarContrato(id)
+        return if (eliminado) {
+            ResponseEntity.noContent().build() // Retorna 204 (Éxito sin contenido)
+        } else {
+            ResponseEntity.notFound().build()  // Retorna 404 si la oferta no existe
+        }
     }
 }

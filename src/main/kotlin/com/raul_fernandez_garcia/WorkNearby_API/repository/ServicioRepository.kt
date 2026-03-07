@@ -13,6 +13,6 @@ interface ServicioRepository : JpaRepository<Servicio, Int> {
     //CASO 2: CLIENTE
     fun findByCliente_Usuario_IdUsuario(idUsuario: Int): List<Servicio>
 
-    // (Opcional) Filtrar por estado (ej: ver solo "pendientes")
+    // Filtrar por estado (ej: ver solo "pendientes")
     fun findByTrabajador_Usuario_IdUsuarioAndEstado(idUsuario: Int, estado: String): List<Servicio>
 }
