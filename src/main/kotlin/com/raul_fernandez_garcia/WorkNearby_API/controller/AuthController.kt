@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*
 @RequestMapping("/api/auth")
 class AuthController(
     private val authService: AuthService,
-    private val usuarioRepository: UsuarioRepository
+    private val usuarioRepository: UsuarioRepository,
 ) {
 
     data class LoginRequest(val email: String, val password: String)
@@ -38,3 +38,5 @@ class AuthController(
         return ResponseEntity.status(401).body("Credenciales incorrectas")
     }
 }
+
+
