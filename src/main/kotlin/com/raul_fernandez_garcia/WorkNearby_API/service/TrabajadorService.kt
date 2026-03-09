@@ -17,9 +17,8 @@ class TrabajadorService(
     private val usuarioRepository: UsuarioRepository
 ) {
 
-    //private val BASE_URL = "http://192.168.1.139:8080"
-    //private val BASE_URL = "http://192.168.0.20:8080"
-    private val BASE_URL = "http://192.168.1.131:8080"
+    private val BASE_URL = "http://192.168.1.134:8080"
+    //private val BASE_URL = "http://192.168.1.131:8080"
 
     // Para ver "Mi Perfil" cuando soy pintor
     fun obtenerPerfilPorUsuarioId(idUsuario: Int): TrabajadorDTO {

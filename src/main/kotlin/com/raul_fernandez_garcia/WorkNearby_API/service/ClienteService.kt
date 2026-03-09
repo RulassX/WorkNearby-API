@@ -15,9 +15,8 @@ class ClienteService(
     private val usuarioRepository: UsuarioRepository
 ) {
     //movil fisico: ip local
-    //private val BASE_URL = "http://192.168.1.139:8080"
-    //private val BASE_URL = "http://192.168.0.20:8080"
-    private val BASE_URL = "http://192.168.1.131:8080"
+    private val BASE_URL = "http://192.168.1.134:8080"
+    //private val BASE_URL = "http://192.168.1.131:8080"
 
     //OBTENER PERFIL
     fun obtenerPerfilPorUsuarioId(idUsuario: Int): ClienteDTO {
