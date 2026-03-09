@@ -36,7 +36,7 @@ class TrabajadorService(
 
     private fun convertirADTO(trabajador: Trabajador): TrabajadorDTO {
         val u = trabajador.usuario
-        val urlFoto = if (u.fotoPerfil != null) "$BASE_URL/api/recursos/user/${u.idUsuario}/foto" else null
+        val urlFoto = if (u.fotoPerfil != null) "$BASE_URL/api/recursos/usuario/${u.idUsuario}/foto" else null
 
         val usuarioDTO = UsuarioDTO(
             id = u.idUsuario!!,
